@@ -1,0 +1,16 @@
+#!/bin/sh
+
+MONGREL_RAILS="/usr/local/bin/mongrel_rails"
+CONF_FILE="config/deploy/production/mongrel_cluster.yml"
+THIN_CONF_FILE="/home/spkndru/railsapps/spkndru/shared/system/spknd.yml"
+
+ln -s /home/spkndru/railsapps/spkndru/nedvjs /home/spkndru/railsapps/spkndru/current/public/images
+ln -s /home/spkndru/railsapps/spkndru/postphotos /home/spkndru/railsapps/spkndru/current/public/images
+ln -s /home/spkndru/railsapps/spkndru/avatars /home/spkndru/railsapps/spkndru/current/public/images
+
+echo "Starting spkndru application"
+#$MONGREL_RAILS cluster::stop -C $CONF_FILE
+#$MONGREL_RAILS cluster::start -C $CONF_FILE
+
+thin stop -C $THIN_CONF_FILE
+thin start -C $THIN_CONF_FILE

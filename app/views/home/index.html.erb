@@ -1,0 +1,58 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'menu' %>
+<% end %>
+<div id="homelogo">
+	<div class="container_12">
+		<div class="grid_5">
+			<div id="slogan" class="grid_5">&nbsp;</div>
+			<div class="clear"></div>
+		  <div class="grid_5">
+			  <ul class="ul1">
+			    <li><a href="/aboutus/lnk1">Юридическое сопровождение сделок </a></li>
+          <li><a href="/aboutus/lnk3">Защита прав потребителей </a></li>
+          <li><a href="/aboutus/lnk4">Представление Ваших интересов в суде </a></li>
+        </ul>
+	    </div>
+		  <div class="clear"></div>
+			<div class="grid_5">
+			  <a href="/aboutus" class="button">читать еще...</a>&nbsp;
+			  <a href="/aboutus/questions" class="button1">задать вопрос</a>
+		  </div>
+		  <div class="clear"></div>
+		</div>
+		<div id="logo2" class="grid_7"></div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+<div class="container_12">
+	<div class="grid_12">&nbsp;</div>
+	<div class="clear"></div>
+	<div id="content" class="grid_7">
+		<h2>Горящие предложения!</h2>
+
+		<% for post in @post %>
+			<% postphotos = post.postfotos.all(:order => 'id asc') %>
+			<% image = postphotos[0] %>
+			<% if image != nil %>
+				<a href="/direct/<%= post.id %>"><img alt="" src="<%= image.photo.url(:small) %>" class="img-indent1" /></a>
+			<% end %>
+		<% end %>
+		<br /><br />
+		<h4>Мы предлагаем комплекс услуг, связанных с покупкой и продажей недвижимости </h4>
+		Оказываем консалтинговые услуги, а также полное юридическое сопровождение по ипотечному кредитованию и по инвестированию капитала в недвижимость ... <a href="/aboutus/lnk1" class="link">Читать дальше</a>
+	</div>
+	<div id="page1col2content" class="grid_4">
+		<div class="content">
+			<h2>Все предложения</h2>
+			<ul class="ul">
+			    <li class="li"><div><a href="/posts/nedvjs"><strong>Недвижимость</strong><br />Тихорецк, Краснодарский край</a></div></li>
+			    <li class="li1"><div><a href="/posts/autos"><strong>Автотранспорт</strong><br />Тихорецк и район</a></div></li>
+			    <li class="li2"><div><a href="/posts/appliances"><strong>Бытовая техника</strong><br />компьютеры, телефоны </a></div></li>
+			    <li class="li3"><div><a href="/posts/uslugi"><strong>Услуги</strong><br />город и район</a></div></li>
+				<li class="li4"><div><a href="/posts/raznoe"><strong>Разное</strong><br />Краснодарский край, Тихорецк</a></div></li>
+			</ul>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>

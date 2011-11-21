@@ -1,0 +1,45 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'menu' %>
+<% end %>
+
+<div id="pcselector" class="container_16">
+	<div class="grid_3">
+		<a href="/posts/nedvjs"><img alt="" src="/images/nedvj0.jpg" /></a><br />
+        <a href="/posts/nedvjs" class="link2">
+          Недвижимость
+        <br>
+			<%=h @nedvij -%>
+		</a>
+	</div>
+	<div class="grid_3">
+		<a href="/posts/autos"><img alt="" src="/images/auto0.jpg" /></a><br />
+        <a href="/posts/autos" class="link2">
+          Автотранспорт
+        <br>
+			<%=h @avtos -%>
+		</a>
+	</div>
+	<div class="grid_3">
+		<a href="/posts/appliances"><img alt="" src="/images/homeappliances.jpg" /></a><br />
+        <a href="/posts/appliances" class="link2">бытовая техника<br>
+			<%=h @byttechs -%>
+		</a>
+	</div>
+	<div class="grid_3">
+		<a href="/posts/uslugi"><img alt="" src="/images/services0.jpg" /></a><br />
+        <a href="/posts/uslugi" class="link2">услуги<br>
+			<%=h @uslugs -%>
+		</a>
+	</div>
+	<div class="grid_3">
+		<a href="/posts/raznoe"><img alt="" src="/images/raznoe0.png" /></a><br />
+        <a href="/posts/raznoe" class="link2">разное<br>
+			<%=h @raznoes -%>
+		</a>
+	</div>
+	<div class="clear"></div>
+</div>
+<br />
+<br />
+
+<%= render :partial => 'posts' %>

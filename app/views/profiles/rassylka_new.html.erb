@@ -1,0 +1,19 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+    <h5>Кому будем слать сообщение:</h5>
+    <form action="<%= create_rassylka_path %>" method="post">
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+      <input type="radio" name="komu" value="всем зарегистрированным"> Всем зарегистрированным пользователям<br>
+      <input type="radio" disabled name="komu" value="всем кто оставил сообщение в разделе о недвижимости"> Всем кто оставил объявления по недвижимости<br>
+      <br>
+      <label>Впишите сюда сообщение</label><br>
+      <textarea rows="10" cols="50" name="message"></textarea><br>
+      <input type="submit" name="submit" value="Начать рассылку">
+    </form>
+  </div>
+  <%= render :partial => 'rmenu' %>	
+</div>

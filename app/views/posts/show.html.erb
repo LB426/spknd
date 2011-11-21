@@ -1,0 +1,27 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'menu' %>
+<% end %>
+
+<% if /nedvjs|kvarts|domovlden|kommers|zemuch|arenda/ =~ @category %>
+	<%= render :partial => 'nedvjs' %>
+<% end %>
+
+<% if /autos|legkovye|gruzov|remont|tuning|moto/ =~ @category %>
+	<%= render :partial => 'autos' %>
+<% end %>
+
+<% if /appliances|video|kitchen|wanny|refreg|computers/ =~ @category %>
+	<%= render :partial => 'appliances' %>
+<% end %>
+
+<% if /uslugi|building|medical|style|ads|clubs/ =~ @category %>
+	<%= render :partial => 'uslugi' %>
+<% end %>
+
+<% if /raznoe|igrushki|razvlekalovo|zivotnye|ucheba|ostalnoe/ =~ @category %>
+	<%= render :partial => 'raznoe' %>
+<% end %>
+
+<% if /show/ =~ @category %>
+	<%= render :partial => 'postssearch' %>
+<% end %>

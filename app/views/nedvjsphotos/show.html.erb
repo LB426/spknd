@@ -1,0 +1,18 @@
+<% title "Фотография лота №#{@nedvj.id}" %>
+
+<p>
+  <strong>Описание:</strong>
+  <%=h @nedvj.name %>
+</p>
+<p>
+  <strong>Комментарий к фото:</strong>
+  <%=h @nedvjsphoto.notes %>
+</p>
+
+<%= image_tag @nedvjsphoto.photo.url(:small) %>
+
+<p>
+  <%= link_to "Вернуться к лоту №#{@nedvj.id}", nedvj_path(@nedvj) %> |
+  <%= link_to "Изменить фото", edit_nedvjsphoto_path(@nedvjsphoto) %> |
+  <%= link_to "Удалить фото", @nedvjsphoto, :confirm => 'Are you sure?', :method => :delete %>
+</p>

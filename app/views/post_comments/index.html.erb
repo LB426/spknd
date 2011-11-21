@@ -1,0 +1,134 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'menu' %>
+<% end %>
+
+<div id="postscontent" class="container_16">
+	<div class="grid_3">
+		<% postfotos = @post.postfotos.all(:order => 'id asc') %>
+		<% counter = 0 %>
+		<% for image in postfotos %>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("a[rel=<%= @post.id %>]").fancybox({
+						'transitionIn'		: 'none',
+						'transitionOut'		: 'none',
+						'titlePosition' 	: 'over',
+						'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) { return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>'; }
+					});
+				});
+			</script>
+			<% if counter==0 then %>
+				<a id="<%= @post.id %>" rel="<%= @post.id %>" href="<%= image.photo.url(:medium) %>" title="<%= image.comment %>"><img alt="" src="<%= image.photo.url(:small) %>" /></a>
+			<% else%>
+				<span style="DISPLAY: none; VISIBILITY: hidden">
+				<a id="<%= @post.id %>" rel="<%= @post.id %>" href="<%= image.photo.url(:medium) %>" title="<%= image.comment %>" ><img alt="" src="" /></a>
+				</span>
+			<% end%>
+			<% counter = counter + 1 %>
+		<% end %>
+		<% if counter == 0 %>
+			<img alt="no photo" src="/images/nophoto.png">
+		<% end %>
+	</div>
+	<div class="grid_12">
+		<h3><%=h @post.name %></h3>
+		<h4>цена руб.</h4>
+		<h4><%=h @post.content %></h4>
+	</div>
+	<div class="grid_1">
+		<% if current_user %>
+			<% if @post.user_id == current_user.id %>
+				<%= link_to "Изменить", edit_post_path(@post) %>
+				<%= link_to "Удалить", @post, :confirm => 'Are you sure?', :method => :delete %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="clear"></div>
+	<div class="grid_3">
+		<a class="tt" href="#">смотреть все фото...(<%=h postfotos.size %>)<span>Нажми на картинку!!!</span></a>
+	</div>
+	<div class="grid_6">
+		<%=h User.find(@post.user_id).username %>
+		<%=h Russian::strftime(@post.created_at, "%d %B %Y, %H:%M") %>
+	</div>
+	<div class="grid_6">
+		<%= link_to "Комментарии...", post_post_comments_path(@post) %>
+		(<%= @post.post_comments.count %> шт.)
+		<a href="#label1">(+)добавить комментарий</a>
+	</div>
+	<div class="clear"></div>
+</div><br /><br />
+
+<% counter = 0 %>
+<% for post_comment in @post_comments %>
+	<% counter = counter + 1 %>
+	<div id="postscontent" class="container_16">
+		<div class="grid_1">&nbsp;</div>
+		<div class="grid_1">
+			<%=h image_tag User.find(post_comment.user_id).avatar.url(:verysmall), :size => "50x50" -%>
+		</div>
+		<div class="grid_1">&nbsp;</div>
+		<div class="grid_10">
+			<h6><%=h post_comment.content %></h6>
+		</div>
+		<div class="grid_3">&nbsp</div>
+		<div class="clear"></div>
+		<span class="postfooter">
+		<div class="grid_3">
+			<%=h User.find(post_comment.user_id).username %><br />
+			от <%=h Russian::strftime(post_comment.created_at, "%d %B %Y, %H:%M") %>
+		</div>
+		<div class="grid_10">
+			&nbsp;
+		</div>
+		<div class="grid_3">
+			комментарий №<%=h counter -%>
+			<a href="#label1">(+)добавить</a>
+			<% if current_user %>
+				<% if /manager/ =~ current_user.groups %>
+					<%= link_to "(-)Удалить", post_post_comment_path(post_comment.post_id, post_comment), :confirm => 'Вы уверены?', :method => :delete %>
+				<% end %>
+			<% end %>
+		</div>
+		</span>
+		<div class="clear"></div>
+	</div>
+	<br />
+<% end %>
+<div class="container_16">
+	<div class="grid_3">&nbsp;</div>
+	<div class="grid_10"><a name="label1"></a><h4>Добавить комментарий к объявлению:</h4></div>
+	<div class="grid_3">&nbsp;</div>
+	<div class="clear"></div>
+	<div class="grid_3">&nbsp;</div>
+	<div class="grid_10">
+		<% form_for @post_comment, :url => { :action => "create" } do |f| %>
+		  <%= f.error_messages %>
+			<%= f.text_area :content, :cols => 40, :rows => 8, :class => "myinputstyle" %>
+		    <%= f.submit "Отправить" %>
+		<% end %>
+	</div>
+	в комментариях могут быть только русские буквы и цифры
+	<div class="grid_3">&nbsp;
+	</div>
+	<div class="clear"></div>
+</div>
+
+<!--
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Content</th>
+  </tr>
+  <% for post_comment in @post_comments %>
+    <tr>
+      <td><%=h post_comment.name %></td>
+      <td><%=h post_comment.content %></td>
+      <td><%= link_to "Show", post_post_comment_path(post_comment.post_id, post_comment ) %></td>
+	  <td><%= link_to "Edit", edit_post_post_comment_path(post_comment.post_id, post_comment) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Post Comment", new_post_post_comment_path %></p>
+-->

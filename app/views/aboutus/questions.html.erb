@@ -1,0 +1,47 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'menu' %>
+<% end %>
+
+<%= render :partial => 'pageslogan' %>
+
+<div class="container_12">
+	<div class="grid_6">
+		<div class="content">
+			<%- flash.each do |name, msg| -%>
+				<h6><%= content_tag :div, msg, :id => "flash_#{name}" %></h6>
+			<%- end -%>
+			<h3>Вопросы наших клиентов:</h3>
+			
+			<% for q in @questions %>
+				<div id="questblock">
+				<h4>Вопрос 
+				<% if current_user && /manager/ =~ current_user.groups %>
+					( <a href="/aboutus/answer/<%=h q.id -%>" id="quest" title="дать ответ">+</a> , <a href="/aboutus/delquestion/<%=h q.id -%>" id="quest" title="удалить вопрос">-</a> )
+				<% end %>
+				: "<%=h q.question -%>"</h4>
+				<% if q.answer != nil %>
+					Отвечает <a href="/aboutus"><%=h User.find(q.user_id).fio -%></a> 
+					<% if current_user && /manager/ =~ current_user.groups %>
+					( <a href="/aboutus/answer/<%=h q.id -%>" id="quest" title="редактировать ответ">~</a> )
+					<% end %>
+					: <div id="question"><%=h q.answer -%></div>
+				</div>
+				<% end %><br />
+			<% end %>		
+				
+			<%= will_paginate @questions %>
+			<br />
+			<% form_for @question, :url => "/aboutus/questions" do |f| %>
+			  	<%= f.error_messages %>
+				<%= f.label(:title, "Ваш вопрос :", :class => "mylabelstyle") %><br />
+				<%= f.text_area :question, :cols => 35, :rows => 8, :class => "myinputstyle" %><br />
+				<%= f.submit "Отправить" %>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	</div>
+	</div>
+	<%= render :partial => 'rmenu' %>
+	<div class="clear"></div>
+</div>

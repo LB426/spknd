@@ -1,0 +1,10 @@
+--- 
+group: spkndru
+address: 127.0.0.1
+log_file: log/mongrel.log
+port: "7020"
+cwd: /home/spkndru/railsapps/spkndru/current
+environment: production
+user: spkndru
+pid_file: /home/spkndru/railsapps/spkndru/shared/pids/mongrel.pid
+servers: 2

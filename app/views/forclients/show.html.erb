@@ -1,0 +1,38 @@
+<%= will_paginate @nedvjs %>
+
+<% for nedvj in @nedvjs %>
+	<% nedvjsphotos = nedvj.nedvjsphotos.all(:order => 'id asc') %>
+	<div class="container bg">
+		<div class="col-1">
+        <% counter = 0 %>
+		<% for image in nedvjsphotos %>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("a[rel=<%= nedvj.id %>]").fancybox({
+						'transitionIn'		: 'none',
+						'transitionOut'		: 'none',
+						'titlePosition' 	: 'over',
+						'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) { return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>'; }
+					});
+				});
+			</script>
+			<% if counter==0 then %>
+				<a id="<%= nedvj.id %>" rel="<%= nedvj.id %>" href="<%= image.photo.url(:medium) %>" title="<%= image.notes %>"><img alt="" src="<%= image.photo.url(:small) %>" /></a>
+			<% else%>
+				<SPAN style="DISPLAY: none; VISIBILITY: hidden">
+				<a id="<%= nedvj.id %>" rel="<%= nedvj.id %>" href="<%= image.photo.url(:medium) %>" title="<%= image.notes %>" ><img alt="" src="" /></a>
+				</SPAN>
+			<% end%>
+			<% counter = counter + 1 %>
+		<% end %>
+        </div>
+        <div class="col-2">
+			<h3><%= nedvj.name %></h3>
+			<h4><%= nedvj.pricenote %>: <%= nedvj.price %> руб.</h4>
+			<h4><%= nedvj.content %></h4>
+		</div>
+	</div>
+	<br />
+<% end %>
+
+<%= will_paginate @nedvjs %>

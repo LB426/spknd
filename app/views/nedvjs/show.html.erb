@@ -1,0 +1,33 @@
+<% title "Лот №#{@nedvj.id} выставляемый на продажу" %>
+
+<p>
+  <strong>Название:</strong>
+  <%=h @nedvj.name %>
+</p>
+<p>
+  <strong>Описание:</strong>
+  <%=h @nedvj.content %>
+</p>
+<p>
+  <strong>Цена:</strong>
+  <%=h @nedvj.price %>
+</p>
+<p>
+  <strong>Примечание к цене:</strong>
+  <%=h @nedvj.pricenote %>
+</p>
+<p>
+  <strong>Категория:</strong>
+  <%=h @nedvj.category %>
+</p>
+
+<% for nedvjsphoto in @nedvjsphotos %>
+	<%= link_to image_tag(nedvjsphoto.photo.url(:small)), nedvjsphoto_path(nedvjsphoto) %>
+<% end %>
+
+<p>
+  <%= link_to "Все лоты", nedvjs_path %> |
+  <%= link_to "Редактировать лот №#{@nedvj.id}", edit_nedvj_path(@nedvj) %> |
+  <%= link_to "Добавить фото к лоту №#{@nedvj.id}", new_nedvj_nedvjsphoto_path(@nedvj) %> |
+  <%= link_to "Удалить лот №#{@nedvj.id}", @nedvj, :confirm => 'Are you sure?', :method => :delete %>
+</p>

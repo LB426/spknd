@@ -1,0 +1,8 @@
+ru:
+  activerecord:
+    attributes:
+      post:
+        name: "Заголовок"
+        content: "Текст объявления"
+        category: "Категория"
+        razdel: "Раздел"

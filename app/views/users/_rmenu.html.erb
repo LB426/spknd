@@ -1,0 +1,17 @@
+<div id="rmenu" class="grid_3 omega">
+	<ul class="ul2">
+		<li><%= link_to "Мои объявления", posts_profile_path %></li>
+		<li><%= link_to "Мои комментарии", blank_profile_path %></li>
+		<li><%= link_to "Моя статистика", blank_profile_path %></li>
+		<li><%= link_to "Сменить имя/пароль", edit_user_path(:current) %></li>
+		<li><%= link_to "Справка", help_profile_path %></li>
+		<% if current_user && /manager/ =~ current_user.groups %>
+			<li><%= link_to "Лоты по недвиж", nedvjs_path %></li>
+			<li><%= link_to "Изм пар польз", edit_user_path(:current) %></li>
+			<li><%= link_to "Все пользователи", users_path %></li>
+			<li><%= link_to "Соз нов польз", new_user_path %></li>
+		<% end %>
+	</ul>
+</div>
+
+<div class="clear"></div>

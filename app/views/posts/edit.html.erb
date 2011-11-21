@@ -1,0 +1,67 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'emenu' %>
+<% end %>
+
+<div class="container_12">
+	<div class="grid_7">
+		<span class="mylabelstyle">
+		Категория:&nbsp;<%=h Catandrazd.find_by_cat_id(@post.category).category -%><br />
+		Раздел:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=h Catandrazd.find_by_cat_id_and_razd_id(@post.category, @post.razdel).razdel -%>
+		</span><br /><br />
+		<% form_for @post, :html => { :multipart => true } do |f| %>
+		  <%= f.error_messages %>
+		  <p>
+			<%= f.label(:title, "Заголовок :", :class => "mylabelstyle") %><br />
+			<%= f.text_field :name, :size => 41, :class => "myinputstyle" %>
+		  </p>
+		  <p>
+		    <%= f.label(:title, "Текст объявления :", :class => "mylabelstyle") %><br />
+		    <%= f.text_area :content, :cols => 40, :rows => 8, :class => "myinputstyle" %>
+		  </p>
+		  <p>
+			<%= f.label(:title, "Цена, только цифры без пробелов :", :class => "mylabelstyle") %><br />
+			<%= f.text_field :price, :size => 41, :class => "myinputstyle" %>
+		  </p>
+		  <p>
+			<%= f.label(:title, "Комментарий к цене :", :class => "mylabelstyle") %><br />
+			<%= f.text_field :pricecomment, :size => 41, :class => "myinputstyle" %>
+		  </p>
+		  <p>
+			<% fields_for @postfoto do |child_form| %>
+				<%= child_form.label(:title, "Добавить фото:", :class => "mylabelstyle") %><br />
+				<%= child_form.file_field :photo, :size => 26, :class => "myinputstyle" %>
+			<% end %>
+		  </p>
+
+		  <p><%= f.submit "Отправить" %></p>
+		  <p><%= f.submit "Продлить объявление" %></p>
+		<% end %>
+	</div>
+	<div class="grid_5">
+		<span class="mylabelstyle">
+		Фотографии этого объявления:
+		</span><br />
+		<% for postphoto in @postfotos %>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("a[rel=<%= postphoto.id %>]").fancybox({
+						'transitionIn'		: 'none',
+						'transitionOut'		: 'none',
+						'titlePosition' 	: 'over',
+						'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) { return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>'; }
+					});
+				});
+			</script>
+			<a id="<%= postphoto.id %>" rel="<%= postphoto.id %>" href="<%= postphoto.photo.url(:medium) %>" title="<%= postphoto.comment %>"><img alt="" src="<%= postphoto.photo.url(:verysmall) %>" /></a>
+			<%= link_to "Изменить", edit_postfoto_path(postphoto) %>
+			<%= link_to "Большое", postphoto.photo.url %>
+			<%= link_to "Удалить", postphoto, :confirm => 'Are you sure?', :method => :delete %><br />
+		<% end %>
+	</div>
+	<div class="clear"></div>
+	<div class="grid_10">&nbsp;</div>
+	<div class="grid_2">
+		<%= link_to "Удалить объявление", @post, :confirm => 'Are you sure?', :method => :delete %>
+	</div>
+	<div class="clear"></div>
+</div>

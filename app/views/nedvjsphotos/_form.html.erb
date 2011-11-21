@@ -1,0 +1,13 @@
+<% form_for @nedvjsphoto, :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :nedvj_id, :value => @nedvj.id %>
+  <p>
+    <%= f.label :Комментарий_к_фото %><br />
+    <%= f.text_field :notes %>
+  </p>
+  <p>
+    <%= f.label :foto %><br />
+    <%= f.file_field :photo %>
+  </p>
+  <p><%= f.submit "Сохранить" %></p>
+<% end %>

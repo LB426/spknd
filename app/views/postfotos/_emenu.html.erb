@@ -1,0 +1,22 @@
+<div class="container_12">
+	<div id="menu" class="grid_8">
+		<ul class="ul">
+			<li><%= link_to "<em><b>Главная</b></em>", home_path %></li>
+			<li><%= link_to "<em><b>О нас</b></em>", aboutus_path %></li>
+			<li><%= link_to "<em><b>Все объявления</b></em>", posts_path %></li>
+			<li class="current"><%= link_to "<em><b>Вернуться к объявлению</b></em>", edit_post_path(@postfoto.post_id) %></li>
+           </ul>
+	</div>
+	<div id="menu" class="grid_4">
+		<ul class="ul">
+		<% if current_user %>
+			<li><%= link_to "<em><b>моя страница</b></em>", profile_path %></li>
+			<li><%= link_to "<em><b>Выход</b></em>", logout_path %></li>
+		<% else %>
+			<li><%= link_to "<em><b>Вход</b></em>", login_path %></li>
+			<li><%= link_to "<em><b>Регистрация</b></em>", new_user_path %></li>
+		<% end %>
+		</ul>
+	</div>
+	<div class="clear"></div>
+</div>

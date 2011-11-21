@@ -1,0 +1,80 @@
+<% for post in @posts %>
+<div id="postscontent" class="container_16">
+	<div class="grid_3">
+		<% postfotos = post.postfotos.all(:order => 'id asc') %>
+		<% counter = 0 %>
+		<% for image in postfotos %>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("a[rel=<%= post.id %>]").fancybox({
+						'transitionIn'		: 'none',
+						'transitionOut'		: 'none',
+						'titlePosition' 	: 'over',
+						'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) { return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>'; }
+					});
+				});
+			</script>
+			<% if counter==0 then %>
+				<a id="<%= post.id %>" rel="<%= post.id %>" href="<%= image.photo.url(:medium) %>" title="<%= image.comment %>"><img alt="" src="<%= image.photo.url(:small) %>" /></a>
+			<% else%>
+				<span style="DISPLAY: none; VISIBILITY: hidden">
+				<a id="<%= post.id %>" rel="<%= post.id %>" href="<%= image.photo.url(:medium) %>" title="<%= image.comment %>" ><img alt="" src="" /></a>
+				</span>
+			<% end%>
+			<% counter = counter + 1 %>
+		<% end %>
+		<% if counter == 0 %>
+			<img alt="no photo" src="/images/nophoto.png">
+		<% end %>
+	</div>
+	<div class="grid_12">
+		<h3><%=h post.name %></h3>
+		<h4><%=h post.pricecomment %> : <%=h post.price %></h4>
+		<h4><%=h post.content %></h4>
+	</div>
+	<div class="grid_1">
+		<% if current_user %>
+			<% if post.user_id == current_user.id || /manager/ =~ current_user.groups %>
+				<%= link_to "Изменить", edit_post_path(post), :title => "изменить объявление" %>
+				<%= link_to "Удалить", post, :confirm => 'Are you sure?', :method => :delete, :title => "удалить объявление" %>
+				<%= link_to image_tag("/images/map_icon.gif", :size => "40x40"), "/maplayers/#{post.id}", :title => "посмотреть на карте" %>
+			<% end %>
+		<% end %>
+		<% if post.lat != nil && !current_user %>
+		  <%= link_to image_tag("/images/map_icon.gif", :size => "40x40"), "/maplayers/#{post.id}", :title => "посмотреть на карте" %>
+    <% end %>
+	</div>
+	<div class="clear"></div>
+	<span class="postfooter">
+	<div class="grid_3">
+		<% if counter == 0 %>
+			фото не загружено
+		<% else %>
+			<a class="tt" href="#">смотреть все фото...(<%=h postfotos.size %>)<span>Нажми на картинку!!!</span></a>
+		<% end %>
+	</div>
+	<div class="grid_5">
+		<% if post.post_comments.count != 0 %>
+			<%= link_to "Комментарии...", post_post_comments_path(post) %>
+			(<%= post.post_comments.count %> шт.)
+		<% else %>
+			<%= link_to "(+)добавить комментарий", post_post_comments_path(post) %>
+		<% end %>
+	</div>
+	<div class="grid_6">
+		<% avatar = User.find(post.user_id).avatar.url(:verysmall) %>
+		<% if /missing/ =~ avatar %>
+			<%=h image_tag "/images/anonymous.png", :size => "16x16" -%>
+		<% else %>
+			<%=h image_tag User.find(post.user_id).avatar.url(:verysmall), :size => "16x16" -%>
+		<% end %>
+		<%=h User.find(post.user_id).username -%>
+		<%=h Russian::strftime(post.created_at, "%d %B %Y, %H:%M") -%>
+	</div>
+	<div class="grid_1">&nbsp;</div>
+	<div class="grid_1">обяв.№<%=h post.id -%></div>
+	</span>
+	<div class="clear"></div>
+</div>
+<br />
+<% end %>

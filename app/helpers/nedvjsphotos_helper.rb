@@ -1,0 +1,2 @@
+module NedvjsphotosHelper
+end

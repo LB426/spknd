@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title><%= h(yield(:title) || "Агенство недвижимости") %></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="недвижимость, Тихорецк, посредник, услуги, документы, риэлтер, агент, юрист, юридические, бесплатные объявления">
+	<meta name="description" content="Агенство недвижимости в Тихорецке посреднические юридические услуги оформление документов риэлтерское агенство бесплатные объявления">
+	<meta name="Revisit" content="14">
+    <%= stylesheet_link_tag 'reset' %>
+	<%= stylesheet_link_tag 'text' %>
+	<%= stylesheet_link_tag '960' %>
+	<%= stylesheet_link_tag 'application' %>
+  <%= yield(:head) %>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-23496789-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+  <body>
+	<div id="header">
+		<div class="container_12">
+			<div id="logo3" class="grid_3">Наш Дом</div>
+			<div id="headerigth" class="grid_8">
+				телефон 8(918) 39-377-88<br>
+				ул. Калинина 28, г.Тихорецк.
+			</div>
+			<%= yield(:menu) %>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="container_12">
+		<div class="grid_2">&nbsp;</div>
+		<div class="grid_6">
+				<%- flash.each do |name, msg| -%>
+					<h6><%= content_tag :div, msg, :id => "flash_#{name}" %></h6>
+				<%- end -%>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<%= yield %>
+	<br />
+	<div id="footer">
+		<div class="container_12">
+			<div class="grid_5">
+				<div class="footermenu">
+				  <ul>
+					<li><a href="http://admin.tih.ru/">администрация Тихорецкого района</a></li>
+          <li><a href="http://tihvesti.ru/">газета Тихорецкие Вести</a></li>
+          <li><a href="http://invest.tih.ru/">инвестиционный портал Тихорецкий район</a></li>
+          <li><a href="http://www.vodatih.ru/">Водоконал города Тихорецк</a></li>
+          </ul>
+				</div>
+			</div>
+			<div class="grid_2">&nbsp;</div>
+			<div class="grid_5">
+				<div class="fright">
+					<strong>Наш Дом</strong> (c)2010 &nbsp; | &nbsp;
+					<!-- begin of Top100 code -->
+          <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2263558"></script>
+          <noscript>
+          <a href="http://top100.rambler.ru/navi/2263558/">
+            <img src="http://counter.rambler.ru/top100.cnt?2263558" alt="Rambler's Top100" border="0" />
+          </a>
+          </noscript>
+          <!-- end of Top100 code -->
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+  </body>
+</html>

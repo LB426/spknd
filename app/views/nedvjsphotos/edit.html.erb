@@ -1,0 +1,9 @@
+<% title "Изменить фото к лоту №#{@nedvj.id}" %>
+
+Описание лота: <%= @nedvj.name %>
+
+<%= render :partial => 'form' %>
+
+<p>
+  <%= link_to "Вернуться к фото", @nedvjsphoto %>
+</p>

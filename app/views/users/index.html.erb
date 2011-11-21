@@ -1,0 +1,40 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'menu' %>
+<% end %>
+
+<div class="container_16">
+	<div class="grid_13 alpha">
+	<span class="mylabelstyle">Все зарегистрированные пользователи</span><br>
+	<table>
+	<% if current_user && /manager/ =~ current_user.groups %>
+	<table>
+		<% for user in @users %>
+		<tr>
+		<% if 1 != user.active %>
+		  <td><h4><%=h user.username -%></h4></td>
+		<% else %>
+		  <td><%=h user.username -%></td>
+		<% end %>
+		<td><%=h user.fio -%></td>
+		<td><%=h user.email -%></td>
+		<td>
+		<% if /missing/ =~ user.avatar.url(:verysmall) %>
+			<%=h image_tag "/images/anonymous.png", :size => "16x16" -%>
+		<% else %>
+			<%=h image_tag user.avatar.url(:verysmall), :size => "16x16" -%>
+		<% end %>	
+		</td>
+		<td><%= Russian::strftime(user.created_at, "%d %B %Y, %H:%M") %></td>
+		<td><%= Russian::strftime(user.updated_at, "%d %B %Y, %H:%M") %></td>
+		<td><%= link_to "Edit", edit_user_path(user) %></td>	
+		</tr>
+		<% end %>
+	</table>
+	<% end %>	
+	</div>
+	
+	<%= render :partial => 'rmenu' %>
+	
+	<div class="clear"></div>
+	
+</div>

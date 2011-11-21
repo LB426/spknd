@@ -1,0 +1,19 @@
+<% title "Nedvjsphotos" %>
+
+<table>
+  <tr>
+    <th>Nedvj</th>
+    <th>Notes</th>
+  </tr>
+  <% for nedvjsphoto in @nedvjsphotos %>
+    <tr>
+      <td><%=h nedvjsphoto.nedvj_id %></td>
+      <td><%=h nedvjsphoto.notes %></td>
+      <td><%= link_to "Show", nedvjsphoto %></td>
+      <td><%= link_to "Edit", edit_nedvjsphoto_path(nedvjsphoto) %></td>
+      <td><%= link_to "Destroy", nedvjsphoto, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Nedvjsphoto", new_nedvjsphoto_path %></p>

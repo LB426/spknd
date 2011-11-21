@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  category: MyString
+  cat_id: 1
+  razdel: MyString
+  razd_id: 1
+
+two:
+  category: MyString
+  cat_id: 1
+  razdel: MyString
+  razd_id: 1

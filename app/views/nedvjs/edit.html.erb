@@ -1,0 +1,37 @@
+<% title "Редактировать данные по лоту №#{@nedvj.id} недвижимость" %>
+
+<% form_for @nedvj, :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :Название %><br />
+    <%= f.text_field :name, :size => 50 %>
+  </p>
+  <p>
+    <%= f.label :Описание %><br />
+    <%= f.text_area :content, :cols => 50, :rows => 10 %>
+  </p>
+  <p>
+    <%= f.label :Цена %><br />
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :Примечание_к_цене %><br />
+    <%= f.text_field :pricenote %>
+  </p>
+  <p>
+    <%= f.label :Категория %><br />
+    <%= select_tag(	:nedvjcategory,
+					options_for_select( [['квартиры', 'квартиры'],
+ 									    ['домовладения', 'домовладения'],
+										['коммерческая недвижимость', 'коммерческая недвижимость'],
+										['земельные участки', 'земельные участки'],
+										['аренда жилья', 'аренда жилья']], @nedvj.category)) %>
+
+  </p>
+  <p><%= f.submit "Сохранить" %></p>
+<% end %>
+
+<p>
+  <%= link_to "Вернуться к описанию лота №#{@nedvj.id}", @nedvj %> |
+  <%= link_to "Все лоты", nedvjs_path %>
+</p>

@@ -1,0 +1,28 @@
+<% title "Лоты по недвижимости выставленные на продажу" %>
+
+<table>
+  <tr>
+	<th>№</th>
+    <th>Наименование</th>
+    <th>Описание</th>
+    <th>Цена</th>
+	<th>Категория</th>
+  </tr>
+  <% i = 0 %>
+  <% for nedvj in @nedvjs %>
+    <tr>
+	  <% i = i + 1 %>
+	  <td><%=h i %></td>
+      <td><%=h nedvj.name %></td>
+      <td><%=h nedvj.content %></td>
+      <td><%=h nedvj.price %></td>
+	  <td><%=h nedvj.category %></td>
+      <td><%= link_to "Показать", nedvj %></br>
+      	<%= link_to "Изменить", edit_nedvj_path(nedvj) %></br>
+      	<%= link_to "Удалить", nedvj, :confirm => 'Are you sure?', :method => :delete %>
+	  </td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "Добавить", new_nedvj_path %></p>

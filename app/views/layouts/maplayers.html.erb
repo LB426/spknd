@@ -1,0 +1,213 @@
+<html>
+  <head>
+    <title><%= h(yield(:title) || "Агенство недвижимости") %></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="недвижимость, Тихорецк, посредник, услуги, документы, риэлтер, агент, юрист, юридические">
+	<meta name="description" content="Агенство недвижимости в Тихорецке посреднические юридические услуги оформление документов риэлтерское агенство">
+	<meta name="Revisit" content="14">
+    <%= stylesheet_link_tag 'reset' %>
+	<%= stylesheet_link_tag 'text' %>
+	<%= stylesheet_link_tag '960' %>
+	<%= stylesheet_link_tag 'application' %>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<style type="text/css">
+    html, body, #basicMap {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+    .catalogmap{
+        width: 900px;
+        height: 600px;
+        border: 1px solid #ccc;
+    }
+    #tags{display: none;}
+    #docs p {margin-bottom: 0.5em;}
+  </style>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script>
+    var map;
+    var layer;
+    var markers;
+    var icon;
+    var currentPopup;
+
+    <% if current_user %>
+    <% if @post.user_id == current_user.id || /manager/ =~ current_user.groups %>
+    OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
+      defaultHandlerOptions: {
+          'single': true,
+          'double': false,
+          'pixelTolerance': 0,
+          'stopSingle': false,
+          'stopDouble': false
+      },
+      initialize: function(options) {
+        this.handlerOptions = OpenLayers.Util.extend({}, this.defaultHandlerOptions);
+        OpenLayers.Control.prototype.initialize.apply(this, arguments); 
+        this.handler = new OpenLayers.Handler.Click(  this, 
+                                                      {'click': this.trigger},  
+                                                      this.handlerOptions
+                                                    );
+      }, 
+      trigger: function(e) {
+        var lonlat = map.getLonLatFromViewPortPx(e.xy).transform(
+            new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"));
+        // alert("Устанавливаю координаты\n" + lonlat.lat + " N, " + lonlat.lon + " E");
+        $.ajax({
+          type: "PUT",
+          url: '/maplayers/setcoordinate/<%= @post.id %>',
+          data: { longitude: lonlat.lon, latitude: lonlat.lat, authenticity_token: "<%= form_authenticity_token %>" },
+          success: function(msg){
+            if(msg == 'true'){
+    			    window.location = window.location ;
+    			  }else{
+    			    alert('не удалось установить координаты на карте, обратитесь к администрации сайта для решения этой проблемы')
+    			  }
+          }
+        });
+      }
+    });
+    <% end %>
+    <% end %>
+
+    AutoSizeFramedCloud = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+      'autoSize': false
+    });
+
+   function init(){
+      map = new OpenLayers.Map('map');
+      layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+      map.addLayer(layer);
+      map.addControl(new OpenLayers.Control.MousePosition());
+      <% if @post.lng == nil %>
+        map.setCenter(
+         new OpenLayers.LonLat(40.1195, 45.8421).transform(
+           new OpenLayers.Projection("EPSG:4326"),
+           map.getProjectionObject()
+           ), 15
+         ); 
+      <% else %>
+          map.setCenter(
+            new OpenLayers.LonLat(<%= @post.lng -%>, <%= @post.lat -%> + 0.002).transform(
+              new OpenLayers.Projection("EPSG:4326"),
+              map.getProjectionObject()
+              ), 15
+            );
+          markers = new OpenLayers.Layer.Markers("Markers");
+          map.addLayer(markers);
+          var size = new OpenLayers.Size(60,60);
+          var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+          icon = new OpenLayers.Icon('cloudmade.gif', size, offset);
+
+          var overflow;
+          var feature = new OpenLayers.Feature(markers, new OpenLayers.LonLat(<%= @post.lng -%>, <%= @post.lat -%>).transform( new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject())); 
+          feature.closeBox = true;
+          feature.popupClass = AutoSizeFramedCloud;
+          feature.data.popupContentHTML = '<% if @pic != nil %><%= image_tag @pic.photo.url(:small) %><% end %><br>' +
+          "<h6 style='text-align: center'><a href='/direct/<%= @post.id -%>'>" +
+          "<%= @post.name %></a></h6>";
+          feature.data.overflow = (overflow) ? "auto" : "hidden";
+
+          var marker = feature.createMarker();
+
+          var markerClick = function (evt) {
+            if (this.popup == null) {
+              this.popup = this.createPopup(this.closeBox);
+              map.addPopup(this.popup);
+              this.popup.show();
+            } else {
+              this.popup.toggle();
+            }
+            currentPopup = this.popup;
+            OpenLayers.Event.stop(evt);
+          };
+          marker.events.register("mousedown", feature, markerClick);
+          markers.addMarker(marker);
+          feature.popup = feature.createPopup(feature.closeBox);
+          map.addPopup(feature.popup);
+          feature.popup.show();
+      <% end %>
+      <% if current_user %>
+      <% if @post.user_id == current_user.id || /manager/ =~ current_user.groups %>
+        var click = new OpenLayers.Control.Click();
+        map.addControl(click);
+        click.activate();
+      <% end %>
+      <% end %>
+    }
+    
+  </script>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-23496789-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+  </head>
+  <body onload="init();">
+	<div id="header">
+		<div class="container_12">
+			<div id="logo3" class="grid_3">Наш Дом</div>
+			<div id="headercentr" class="grid_6">
+				&nbsp;
+			</div>
+			<div id="headerigth" class="grid_3">
+				телефон 8(918) 39-377-88<br>
+				ул. Калинина 28, г.Тихорецк.
+			</div>
+			<%= yield(:menu) %>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="container_12">
+		<div class="grid_4">&nbsp;</div>
+		<div class="grid_4">
+			<%- if ENV['RAILS_ENV'] == 'development' -%>
+				<%- flash.each do |name, msg| -%>
+					<h6><%= content_tag :div, msg, :id => "flash_#{name}" %></h6>
+				<%- end -%>
+			<%- end -%>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<%= yield %>
+	<br />
+  	<div id="footer">
+  		<div class="container_12">
+  			<div class="grid_5">
+  				<div class="footermenu">
+  				  <ul>
+  					<li><a href="http://admin.tih.ru/">администрация Тихорецкого района</a></li>
+            <li><a href="http://tihvesti.ru/">газета Тихорецкие Вести</a></li>
+            <li><a href="http://invest.tih.ru/">инвестиционный портал Тихорецкий район</a></li>
+            <li><a href="http://www.vodatih.ru/">Водоконал города Тихорецк</a></li>
+            </ul>
+  				</div>
+  			</div>
+  			<div class="grid_2">&nbsp;</div>
+  			<div class="grid_5">
+  				<div class="fright">
+  					<strong>Наш Дом</strong> (c)2010 &nbsp; | &nbsp;
+  					<!-- begin of Top100 code -->
+            <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2263558"></script>
+            <noscript>
+            <a href="http://top100.rambler.ru/navi/2263558/">
+              <img src="http://counter.rambler.ru/top100.cnt?2263558" alt="Rambler's Top100" border="0" />
+            </a>
+            </noscript>
+            <!-- end of Top100 code -->
+  				</div>
+  			</div>
+  			<div class="clear"></div>
+  		</div>
+  	</div>
+    </body>
+  </html>

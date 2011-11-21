@@ -1,0 +1,32 @@
+<% form_for @user, :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <p>
+	<%= f.label(:title, "имя пользователя для входа :", :class => "mylabelstyle") %><br>
+	<%= f.text_field :username, :class => "myinputstyle" %>
+  </p>
+  <p>
+	<%= f.label(:email, "адрес электронной почты, e-mail :", :class => "mylabelstyle") %><br>
+	<%= f.text_field :email, :class => "myinputstyle" %>
+  </p>
+  <p>
+	<%= f.label(:title, "Ф.И.О. :", :class => "mylabelstyle") %><br>
+	<%= f.text_field :fio, :class => "myinputstyle" %>
+  </p>
+  <p>
+	<%= f.label(:title, "Пароль :", :class => "mylabelstyle") %><br />
+    <%= f.password_field :password, :class => "myinputstyle" %>
+  </p>
+  <p>
+	<%= f.label(:title, "Подтверждение пароля :", :class => "mylabelstyle") %><br />
+	<%= f.password_field :password_confirmation, :class => "myinputstyle" %>
+  </p>
+  <p>
+	<%= f.label(:title, "Аватар или логотип :", :class => "mylabelstyle") %><br />
+    <%= f.file_field :avatar %>
+  </p>
+  <p><%= f.submit "Изменить" %></p>
+<% end %>
+
+<%= image_tag @user.avatar.url(:small) %><br /><br /><br />
+<%= link_to "Удалить пользователя", @user, :confirm => 'Вы уверены?', :method => :delete, :title => "удалить учетную запись пользователя" %>
+	

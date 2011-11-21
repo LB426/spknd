@@ -1,0 +1,13 @@
+<% form_for @user do |f| %>
+  <%= f.error_messages %>
+  <p>
+	<%= f.label(:title, "Имя для входа :", :class => "mylabelstyle") %><br />
+	<%= f.text_field :username, :class => "myinputstyle" %>
+  </p>
+  <p>
+	<%= f.label(:title, "e-mail :", :class => "mylabelstyle") %><br />
+    <%= f.text_field :email, :class => "myinputstyle" %>
+  </p>
+
+  <p><%= f.submit "Зарегистрировать" %></p>
+<% end %>

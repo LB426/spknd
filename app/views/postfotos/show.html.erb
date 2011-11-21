@@ -1,0 +1,22 @@
+<% title "Postfoto" %>
+
+<p>
+  <strong>User:</strong>
+  <%=h @postfoto.user_id %>
+</p>
+<p>
+  <strong>Post:</strong>
+  <%=h @postfoto.post_id %>
+</p>
+<p>
+  <strong>Comment:</strong>
+  <%=h @postfoto.comment %>
+</p>
+
+<%= image_tag @postfoto.photo.url(:small) %>
+
+<p>
+  <%= link_to "Edit", edit_postfoto_path(@postfoto) %> |
+  <%= link_to "Destroy", @postfoto, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", postfotos_path %>
+</p>

@@ -1,0 +1,21 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'users/menu' %>
+<% end %>
+<div class="container_12">
+	<div class="grid_12">
+	 <h1>Если вы забыли свой пароль введите Ваш email который был указан при регистрации</h2>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="container_12">
+  <% form_tag password_resets_path do %>
+	<div class="grid_1"><label class="mylabelstyle">Email:</label></div>
+	<div class="grid_7">
+    <%= text_field_tag "email", nil, :class => "myinputstyle", :size => 40 %>
+	</div>
+	<div class="grid_4">
+	  <%= submit_tag "сбросить пароль" %>
+	</div>
+	<% end %>
+	<div class="clear"></div>
+</div>

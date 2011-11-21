@@ -1,0 +1,21 @@
+<% title "Postfotos" %>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Post</th>
+    <th>Comment</th>
+  </tr>
+  <% for postfoto in @postfotos %>
+    <tr>
+      <td><%=h postfoto.user_id %></td>
+      <td><%=h postfoto.post_id %></td>
+      <td><%=h postfoto.comment %></td>
+      <td><%= link_to "Show", postfoto %></td>
+      <td><%= link_to "Edit", edit_postfoto_path(postfoto) %></td>
+      <td><%= link_to "Destroy", postfoto, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Postfoto", new_postfoto_path %></p>

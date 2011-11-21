@@ -1,0 +1,22 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'menu' %>
+<% end %>
+
+<div class="container_16">
+	<div class="grid_13 alpha">
+	<% if current_user %>
+		<% if "blogger" == current_user.groups %>
+			<%= render :partial => 'blogger' %>
+		<% end %>
+
+		<% if /manager/ =~ current_user.groups %>
+			<%= render :partial => 'manager' %>
+		<% end %>
+	<% end %>	
+	</div>
+	
+	<%= render :partial => 'rmenu' %>
+	
+	<div class="clear"></div>
+	
+</div>

@@ -1,0 +1,26 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'menu' %>
+<% end %>
+
+<%= render :partial => 'pageslogan' %>
+
+<div class="container_12">
+	<div class="grid_7">
+		<div class="content">
+			<% if current_user && /manager/ =~ current_user.groups %>
+				<h5>Вопрос : <%=h @question.question -%></h5>
+				<% form_for @question, :url => "/aboutus/answer/#{@question.id}" do |f| %>
+				  	<%= f.error_messages %>
+					<%= f.label(:title, "Ответ :", :class => "mylabelstyle") %><br />
+					<%= f.text_area :answer, :cols => 40, :rows => 8, :class => "myinputstyle" %><br />
+					<%= f.submit "Отправить" %>
+				<% end %>
+			<% end %>
+			<br />		
+			<br />
+		</div>
+		<div class="clear"></div>
+	</div>
+	<%= render :partial => 'rmenu' %>
+	<div class="clear"></div>
+</div>

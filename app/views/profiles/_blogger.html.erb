@@ -1,0 +1,34 @@
+<% for post in @posts %>
+	<div class="container_16">
+		<div class="grid_1">№<%=h post.id -%></div>
+		<div id="postscontent" class="grid_10">
+			<h3><%=h post.name %></h3>
+			<h4><%=h post.pricecomment %> : <%=h post.price %></h4>
+			<h4><%=h post.content %></h4>
+		</div>
+		<div class="grid_1">
+		  <%= link_to image_tag("/images/map_icon.gif", :size => "40x40"), "/maplayers/#{post.id}", :title => "нанести на карту" %>
+		</div>
+		<div class="clear"></div>
+		<div class="grid_1">&nbsp;</div>
+		<div class="grid_4">
+			<%=h current_user.username %>
+			<%=h Russian::strftime(post.created_at, "%d %B %Y, %H:%M") %>
+		</div>
+		<div class="grid_2">
+			<% if post.post_comments.count != 0 %>
+				<%= link_to "Комментарии...", post_post_comments_path(post) %>
+				(<%= post.post_comments.count %> шт.)
+			<% else %>
+				Комментарии...(0)
+			<% end %>
+		</div>
+		<div class="grid_2">&nbsp;</div>
+		<div class="grid_6">
+			<%= link_to "Изменить", edit_post_path(post), :title => "Изменить объявление" %>
+			<%= link_to "Удалить", post, :confirm => 'Are you sure?', :method => :delete, :title => "Удалить объявление" %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<br /><br />
+<% end %>
