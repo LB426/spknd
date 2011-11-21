@@ -7,9 +7,9 @@ THIN_CONF_FILE="/home/spkndru/railsapps/spkndru/shared/system/spknd.yml"
 #ln -s /home/spkndru/railsapps/spkndru/nedvjs /home/spkndru/railsapps/spkndru/current/public/images
 #ln -s /home/spkndru/railsapps/spkndru/postphotos /home/spkndru/railsapps/spkndru/current/public/images
 #ln -s /home/spkndru/railsapps/spkndru/avatars /home/spkndru/railsapps/spkndru/current/public/images
-ln -s /home/spkndru/spknd/shared/nedvjs /home/spkndru/spknd/current/public/images
-ln -s /home/spkndru/spknd/shared/postphotos /home/spkndru/spknd/current/public/images
-ln -s /home/spkndru/spknd/shared/avatars /home/spkndru/spknd/current/public/images
+#ln -s /home/spkndru/spknd/shared/nedvjs /home/spkndru/spknd/current/public/images
+#ln -s /home/spkndru/spknd/shared/postphotos /home/spkndru/spknd/current/public/images
+#ln -s /home/spkndru/spknd/shared/avatars /home/spkndru/spknd/current/public/images
 
 
 echo "Starting spkndru application"
