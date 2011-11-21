@@ -1,1 +1,7 @@
-README
+устанавливаем нужную версию Rails
+gem install -v=2.3.8 rails
+gem install -v=2.1.5 authlogic
+gem install -v=2.3.3 paperclip
+gem sources --add 'http://gems.github.com/'
+gem install -v=2.3.11 mislav-will_paginate
+gem install -v=0.2.7 russian
