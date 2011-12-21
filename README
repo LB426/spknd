@@ -10,3 +10,4 @@ gem install mysql
 gem update --system 1.6.2
 rake gems:refresh_specs
 gem install rdoc
+21.12.2011 Меняем дизайн горизонтального меню
