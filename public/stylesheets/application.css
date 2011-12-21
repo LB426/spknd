@@ -89,7 +89,7 @@
 	border-bottom: 1px solid #C0C0C0;
 }
 #postscontent .myimg { margin: 0px 0px;}
-#postscontent h3{color:#444343; font-size:2.25em; margin-bottom:0px; letter-spacing:-1px; line-height:1.2em }
+#postscontent h3{color:#444343; font-size:1.5em; margin-bottom:0px; letter-spacing:-1px; line-height:1.2em }
 #postscontent h4{color:#444343; font-size:1em; margin-bottom:9px;}
 
 #menu {margin-top: 6px;}
@@ -255,3 +255,238 @@ tbody tr:hover { background:#99BCBF;
  border:1px solid #03476F;
  color:#000000;
 }
+
+/*Начало правок НАМWEB*/
+					
+.sf-menu, .sf-menu * {
+	margin:			0;
+	padding:		0;
+	list-style:		none;
+}
+.sf-menu {
+	line-height:	1.0;
+}
+.sf-menu ul {
+	position:		absolute;
+	top:			-999em;
+	width:			100%; 
+}
+.sf-menu ul li {
+	width:			100%;
+}
+.sf-menu li:hover {
+	visibility:		inherit; 
+}
+.sf-menu li {
+	float:			left;
+	position:		relative;
+}
+.sf-menu a {
+	display:		block;
+	position:		relative;
+}
+.sf-menu li:hover ul,
+.sf-menu li.sfHover ul {
+	left:			0;
+	top:			11.5em;
+	z-index:		99;
+}
+ul.sf-menu li:hover li ul,
+ul.sf-menu li.sfHover li ul {
+	top:			-999em;
+}
+ul.sf-menu li li:hover ul,
+ul.sf-menu li li.sfHover ul {
+	left:			15em; 
+	top:			-4px;
+}
+ul.sf-menu li.left_drop ul li ul {
+	left:			-15.5em; 
+	top:			-4px;
+}
+ul.sf-menu li li:hover li ul,
+ul.sf-menu li li.sfHover li ul {
+	top:			-999em;
+}
+ul.sf-menu li li li:hover ul,
+ul.sf-menu li li li.sfHover ul {
+	left:			10em; 
+	top:			0;
+}
+
+/*** СКИН ДЕМО ***/
+.sf-menu {
+	float:			left;
+	margin-bottom:	1em;
+}
+.sf-menu a {
+	//border-left:	1px solid #fff;
+	//border-top:		1px solid #568c03;
+	padding: 		.75em 1em;
+	text-decoration:none;
+}
+.sf-menu a, .sf-menu a:visited  {
+	color:			#568c03;
+}
+.sf-menu li {
+	background:		#fff;
+}
+.sf-menu li li {
+	background:		#fff;
+	border: 2px solid #6fb800;
+	border-radius: 10px;
+	margin-top: 3px;
+	font-weight: bold;
+}
+
+.sf-menu li:hover, .sf-menu li.sfHover,
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+	background:		#c8ea2b;
+	color: #568c03;
+	
+	border-radius: 10px;
+	outline:		0;
+	
+}
+
+/*** СТРЕЛКИ **/
+.sf-menu a.sf-with-ul {
+	padding-right: 	2.25em;
+	min-width:		1px; 
+}
+.sf-sub-indicator {
+	position:		absolute;
+	display:		block;
+	right:			.75em;
+	top:			1.05em; /* IE6 only */
+	width:			10px;
+	height:			10px;
+	text-indent: 	-999em;
+	overflow:		hidden;
+	background:		url('/images/icons/arrows-ffffff.png') no-repeat -10px -100px; 
+}
+a#house > span.sf-sub-indicator,
+a#car > span.sf-sub-indicator,
+a#tehnika > span.sf-sub-indicator,
+a#uslugi > span.sf-sub-indicator,
+a#box > span.sf-sub-indicator {background-image: none;}
+
+a > .sf-sub-indicator {  
+	top:			.8em;
+	background-position: 0 -100px; 
+}
+
+a:focus > .sf-sub-indicator,
+a:hover > .sf-sub-indicator,
+a:active > .sf-sub-indicator,
+li:hover > a > .sf-sub-indicator,
+li.sfHover > a > .sf-sub-indicator {
+	background-position: -10px -100px; 
+}
+
+
+.sf-menu ul .sf-sub-indicator { background-position:  -10px 0; }
+.sf-menu ul a > .sf-sub-indicator { background-position:  0 0; }
+
+.sf-menu ul a:focus > .sf-sub-indicator,
+.sf-menu ul a:hover > .sf-sub-indicator,
+.sf-menu ul a:active > .sf-sub-indicator,
+.sf-menu ul li:hover > a > .sf-sub-indicator,
+.sf-menu ul li.sfHover > a > .sf-sub-indicator {
+	background-position: -10px 0; 
+}
+
+a#house,a#car,a#tehnika,a#box,a#uslugi {
+	
+	padding: 135px 5px 5px 0;
+	min-width: 185px;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	text-align: center;
+	color: #568c03;
+	font-weight: bold;
+	font-size:14px;
+	
+}
+a#house{
+	background-image: url('/images/icons/house.jpg');
+}
+a#car {
+	background-image: url('/images/icons/car.jpg'); 
+}
+a#tehnika {
+	background-image: url('/images/icons/vacuum.jpg'); 
+}
+a#box {
+	background-image: url('/images/icons/box.jpg'); 
+}
+a#uslugi {
+	background-image: url('/images/icons/uslugi.jpg'); 
+}
+/*Стили вида объявлений*/
+.locality {
+	text-align: center;
+	color: #568C03;
+	font-weight: bold;
+	}
+#postscontent p {
+	font-size: 1.2em;}
+#postscontent div.grid_3 {
+	text-align: center;
+	width: 168px;
+	}
+#postscontent div.grid_3 a img {
+	border-radius: 10px;
+	border: 2px solid #568c03;
+	padding: 2px;
+	}
+#postscontent p.price_description {
+	color: #568C03;
+	}
+#postscontent p.price_description b{
+	color: #444343;
+	}
+#postscontent.container_16 span.postfooter div.grid_5 {
+	text-align: left;
+	}
+#postscontent.container_16 span.postfooter div.grid_6 a:link,
+#postscontent.container_16 span.postfooter div.grid_6 a:visited,
+#postscontent.container_16 span.postfooter div.grid_6 a:active
+ {
+	color: #568C03;
+}
+#postscontent.container_16 span.postfooter div.grid_6 a:hover,
+#postscontent.container_16 span.postfooter div.grid_6 a:focus
+ {
+	color: #568C03;
+	font-weight: bold;
+}
+#postscontent a:link, #postscontent a:visited, #postscontent a:active, #postscontent a:hover, #postscontent a:focus {
+	color: #568C03;
+	
+}
+
+h3 ul.sf-menu.edit_menu li a {
+	font-size: 0.7em;
+	font-weight: normal;
+	line-height: normal;
+	padding:4px;
+	}
+.sf-menu.edit_menu li:hover ul,
+.sf-menu.edit_menu li.sfHover ul {
+	left:			0;
+	top:			1.2em;
+	z-index:		99;
+}
+h3 ul.sf-menu.edit_menu a > span.sf-sub-indicator {background-image: none;}
+a.tt:hover span.mess_press_img  {
+	background-image: none;
+	background-color: #fff;
+	text-align: center;
+	color: #568C03;
+	padding: 2px 5px;
+	border-radius: 5px;
+}
+
+/*Конец правок НАМ WEB*/
