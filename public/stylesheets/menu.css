@@ -1,0 +1,39 @@
+a#house,a#car,a#tehnika,a#box,a#uslugi {
+	
+	padding-top: 135px;
+	min-width: 146px;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	text-align: center;
+	color: #6bb304;
+}
+a#house{
+	background-image: url('images/house.jpg');
+}
+a#car {
+	background-image: url('images/car.jpg'); 
+}
+a#tehnika {
+	background-image: url('images/vacuum.jpg'); 
+}
+a#box {
+	background-image: url('images/box.jpg'); 
+}
+a#uslugi {
+	background-image: url('images/uslugi.jpg'); 
+}
+#top_menu {width:1000px;
+margin: 0 auto;
+background: #f00;}
+div#header {background-image: url('images/fon.jpg');
+height: 125px;
+	background-position: top center;
+	background-repeat: no-repeat;
+	
+ }
+ div#after_menu {background-image: url('images/aftermenu.jpg');
+  background-position: top center;
+	background-repeat: no-repeat;
+	height: 700px;
+ }
