@@ -86,7 +86,9 @@
 
 #postscontent {
 	/*background: #fff url("16_col.gif") repeat-y;*/
-	border-bottom: 1px solid #C0C0C0;
+	border-bottom: 3px solid #8DC028;
+	margin-bottom: 6px;
+	padding-bottom: 3px;
 }
 #postscontent .myimg { margin: 0px 0px;}
 #postscontent h3{color:#444343; font-size:1.5em; margin-bottom:0px; letter-spacing:-1px; line-height:1.2em }
@@ -341,8 +343,8 @@ ul.sf-menu li li li.sfHover ul {
 
 .sf-menu li:hover, .sf-menu li.sfHover,
 .sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
-	background:		#c8ea2b;
-	color: #568c03;
+	background:		#8DC028;
+	color: #fff;
 	
 	border-radius: 10px;
 	outline:		0;
