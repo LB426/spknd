@@ -34,20 +34,26 @@
 }
 
 #logo3 {
-  margin-top: 10px;
-  margin-left: 0px;
-  font-family: 'Times New Roman', Times, serif;
+	margin: 0px;
+	font-family: 'Times New Roman', Times, serif;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 42px;
+	font-size: 40px;
 	color: #FFFFFF;
 }
+#logo3 h2 {font-size: 35px; margin: 0;}
+
 
 #logo2 {
 	height:371px;
 	background: url(/images/logo2.png) ;
 	background-repeat: no-repeat;
 }
+#select_geo { padding:0; line-height:0;}
+#select_geo select,#select_geo input {float: left;}
+#select_geo select {border-radius: 5px; border: 3px groove #80d102; margin:0 5px 0 0; color:#568C03; font-weight: bold; }
+#select_geo input {background: #80d102; color: #fff; border: 2px outset #6fb504; border-radius: 5px; margin:0;}
+
 
 #homelogo {height:372px;background: transparent url(/images/bg2.png) repeat-x scroll left top}
 #homelogo .ul1{margin:0; list-style:none}
@@ -329,6 +335,7 @@ ul.sf-menu li li li.sfHover ul {
 }
 .sf-menu a, .sf-menu a:visited  {
 	color:			#568c03;
+	font-size:1.1em;
 }
 .sf-menu li {
 	background:		#fff;
@@ -339,6 +346,7 @@ ul.sf-menu li li li.sfHover ul {
 	border-radius: 10px;
 	margin-top: 3px;
 	font-weight: bold;
+	box-shadow: 0px 0px 4px #6cb004;
 }
 
 .sf-menu li:hover, .sf-menu li.sfHover,
@@ -439,7 +447,7 @@ a#uslugi {
 	width: 168px;
 	}
 #postscontent div.grid_3 a img {
-	border-radius: 10px;
+	
 	border: 2px solid #568c03;
 	padding: 2px;
 	}
