@@ -47,7 +47,21 @@
   <body>
 	<div id="header">
 		<div class="container_12">
-			<div id="logo3" class="grid_3">Наш Дом</div>
+			<div id="logo3" class="grid_3"><h2>Наш Дом</h2>
+			<div id="select_geo">
+			<form action="select1.php" method="post">
+			   <select size="1" name="place">
+				<option selected value="Чебурашка">Тихорецк</option>
+				<option value="Крокодил Гена">Кропоткин</option>
+				<option value="Шапокляк">Новороссийск</option>
+				<option value="Крыса Лариса">Краснодар</option>
+			   </select>
+			   <input type="submit" value="Выбрать">
+			  </form>
+			</div>
+			
+			
+			</div>
 			<div id="headercentr" class="grid_6">
 				<% form_tag '/posts/show', :method => :get do -%>
 				  <%= text_field_tag 'search', '', :size => 55 %>
