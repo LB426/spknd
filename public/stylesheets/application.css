@@ -11,6 +11,7 @@
 	background: url(/images/top1.png) ;
 	text-align: center;
 }
+* a:active {outline: none !important; }
 
 #footer { height:151px;color:#ffffff; font-size:14px; background: #579711 url(/images/bot1.gif) top repeat-x ; }
 #footer .footermenu{ padding:14px 0 0 0;}
@@ -79,15 +80,17 @@
 	background: url(none) no-repeat #f7f7f7;
 	font-family: Arial, Helvetica, sans-serif;
 	font-style: normal;
-	font-size: 22px;
+	font-size: 16px;
 	color: #101010;
+	border-radius: 5px;
 }
 
 .mylabelstyle {
 	font-family: tahoma, helvetica, sans-serif;
 	font-style: bold;
-	font-size: 22px;
+	font-size: 18px;
 	color: #101010;
+
 }
 
 #postscontent {
@@ -120,10 +123,11 @@
 #menu .ul1 li a{background:url(/images/marker.gif) top left no-repeat; background-position:0 4px; margin:0; padding-left:13px; color:#545454; text-decoration: none; line-height:2.41em; font-size:1em; font-style:normal} 
 #menu .ul1 li a:hover { text-decoration:none; background:url(/images/marker.gif) top left no-repeat; background-position:0 4px; color:#89bd26}
 
-#rmenu .ul2 {margin:0; padding:0; list-style: none; border-bottom: 1px solid #79C105;}
-#rmenu .ul2 li {margin:0; padding:0;border-top: 1px solid #79C105;border-left: 1px solid #79C105;border-right: 1px solid #79C105;}
-#rmenu .ul2 li a {text-decoration:none;display:block;color: #333333;font-weight: bold;padding: 2px 10px;}
-#rmenu .ul2 li a:hover {background-color: #000000;color: #FFFFFF;}
+#rmenu .ul2 {margin:0; padding:0; list-style: none;}
+#rmenu .ul2 li {margin:5px 0; padding:0; border: 2px solid #79C105; border-radius: 5px; text-align: center;}
+#rmenu .ul2 li a {text-decoration:none;display:block;color: #568C03;font-weight: bold; padding: 5px 5px; outline: none;}
+#rmenu .ul2 li a:hover {box-shadow: 0px 0px 8px #79C105}
+#rmenu .ul2 li a:active {box-shadow: 0px 0px 8px #79C105; background: #79C105; color: #fff;}
 
 #content p{font-size:1em;font-family: Helvetica, sans-serif, Arial;letter-spacing:-0.3px;color:#555555; text-align:left;}
 #content h2{color:#444343; font-size:2.25em; margin-bottom:27px; letter-spacing:-1px; line-height:1.2em }
@@ -181,7 +185,7 @@
 .button1:hover{text-decoration:underline }
 .button2{margin:50px 0px 0px 350px;color:#fff;font-size:12px; background:url(/images/button1.gif) top left no-repeat; width:152px; text-align:center; line-height:32px; display:block; text-decoration:none; text-transform: uppercase; float:left  }
 .button2:hover{text-decoration:underline }
-.link{color:#79c105; text-transform:uppercase; font-weight:bold; background:url(/images/marker.gif) top left no-repeat; padding-left:12px; background-position:0 3px}
+.link{color:#79c105; text-transform:uppercase; font-weight:bold; background:url(/images/marker.gif) top left no-repeat; padding-left:12px; background-position:0 50%}
 .img-left{ float:left; margin:0 28px 16px 0}
 .link2{color:#6bb304; text-transform:uppercase; font-weight:bold; text-decoration:none}
 

@@ -11,6 +11,15 @@ $(document).ready(function() {
 			$("#post_razdel").prepend( $('<option value="0">выберите раздел</option>'));
 			$("#post_razdel").attr("disabled","disabled");
 		}else{
+			if (category == '1') {
+				if ($("#form_nedw").css("display") == "none") {
+				$("#form_nedw").slideToggle("slow");}
+			} else {
+				if ($("#form_nedw").css("display") == "block") {
+				$("#form_nedw").slideToggle("slow");}
+				$("#form_nedw").css("display","none");
+			}
+			
 			$("#post_razdel").empty();
 			$("#post_razdel").prepend( $('<option value="0">выберите раздел</option>'));
 			$("#post_razdel").attr("disabled","");
