@@ -9,13 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110922132904) do
+ActiveRecord::Schema.define(:version => 20120114155748) do
 
   create_table "catandrazds", :force => true do |t|
     t.string   "category"
     t.integer  "cat_id"
     t.string   "razdel"
     t.integer  "razd_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "form"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,6 +83,27 @@ ActiveRecord::Schema.define(:version => 20110922132904) do
     t.string   "lng"
   end
 
+  create_table "product_categories", :force => true do |t|
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_sections", :force => true do |t|
+    t.string   "section"
+    t.integer  "product_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_sub_sections", :force => true do |t|
+    t.string   "subsection"
+    t.integer  "product_category_id"
+    t.integer  "product_section_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "questions", :force => true do |t|
     t.integer  "user_id"
     t.string   "question"
@@ -95,9 +123,9 @@ ActiveRecord::Schema.define(:version => 20110922132904) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "user_messages", :force => true do |t|
-    t.text     "message",                                    :null => false
-    t.string   "komu",                                       :null => false
-    t.string   "result",     :default => "запущено"
+    t.text     "message",                                          :null => false
+    t.string   "komu",                                             :null => false
+    t.string   "result",     :default => "запущен\320\276"
     t.integer  "numsentmsg", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"

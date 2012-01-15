@@ -1,0 +1,38 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'profiles/menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+
+    <h1>Список подразделов</h1>
+
+    <table>
+      <tr>
+        <th>Категория</th>
+        <th>Раздел</th>
+        <th>Подраздел</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
+
+    <% @product_sub_sections.each do |product_sub_section| %>
+      <tr>
+        <td><%=h ProductCategory.find(product_sub_section.product_category_id).category %></td>
+        <td><%=h ProductSection.find(product_sub_section.product_section_id).section %></td>
+        <td><%=h product_sub_section.subsection %></td>
+        <td><%= link_to 'Показать', product_sub_section %></td>
+        <td><%= link_to 'Изменить', edit_product_sub_section_path(product_sub_section) %></td>
+        <td><%= link_to 'Удалить', product_sub_section, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+    </table>
+
+    <br />
+
+    <%= link_to 'Создать подраздел', new_product_sub_section_path %>
+
+  </div>
+  <%= render :partial => 'profiles/rmenu' %>
+</div>

@@ -1,0 +1,31 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'profiles/menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+
+    <h1>Новый раздел</h1>
+    
+    <% form_for(@product_section) do |f| %>
+      <%= f.error_messages %>
+
+      <p>
+        <%= f.label :Категория %><br />
+        <%= f.select :product_category_id, @product_categories.collect {|p| [ p.category, p.id ]}, { :include_blank => "Выберите категорию" } %>
+      </p>
+
+      <p>
+        <%= f.label :Раздел %><br />
+        <%= f.text_field :section %>
+      </p>
+      <p>
+        <%= f.submit 'Создать' %>
+      </p>
+    <% end %>
+
+    <%= link_to 'Назад', product_sections_path %>
+
+  </div>
+  <%= render :partial => 'profiles/rmenu' %>
+</div>

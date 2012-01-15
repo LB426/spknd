@@ -15,21 +15,22 @@
 		<div id="newcatlist">
 			<%= f.label(:razdel, "Раздел :", :class => "mylabelstyle") %>
 			<%= f.select :razdel, "<option value='0'>выберите раздел</option>" %>
-		</div><br />
-			<%= f.label(:title, "Заголовок объявления:", :class => "mylabelstyle") %><br />
-			<%= f.text_field :name, :size => 41, :class => "myinputstyle" %>
-		    <%= f.label(:title, "Текст объявления :", :class => "mylabelstyle") %><br />
-		    <%= f.text_area :content, :cols => 40, :rows => 8, :class => "myinputstyle" %>
-			<% fields_for @postfoto do |child_form| %>
-				<%= child_form.label(:title, "Добавить фото в объявление:", :class => "mylabelstyle") %><br />
-				<%= child_form.file_field :photo, :size => 26, :class => "myinputstyle" %>
-			<% end %>
-			<p>
-			<%= f.label(:title, "Цена, только цифры без пробелов :", :class => "mylabelstyle") %><br />
-			<%= f.text_field :price, :size => 21, :class => "myinputstyle" %><br>
-			<%= f.label(:title, "Комментарий к цене :", :class => "mylabelstyle") %><br />
-			<%= f.text_field :pricecomment, :size => 31, :class => "myinputstyle" %>
-			</p>
+		</div>
+		<br />
+		<%= f.label(:title, "Заголовок объявления:", :class => "mylabelstyle") %><br />
+		<%= f.text_field :name, :size => 41, :class => "myinputstyle" %><br />
+	  <%= f.label(:title, "Текст объявления :", :class => "mylabelstyle") %><br />
+	  <%= f.text_area :content, :cols => 40, :rows => 8, :class => "myinputstyle" %><br />
+		<% fields_for @postfoto do |child_form| %>
+			<%= child_form.label(:title, "Добавить фото в объявление:", :class => "mylabelstyle") %><br />
+			<%= child_form.file_field :photo, :size => 26, :class => "myinputstyle" %>
+		<% end %>
+		<p>
+		<%= f.label(:title, "Цена, только цифры без пробелов :", :class => "mylabelstyle") %><br />
+		<%= f.text_field :price, :size => 21, :class => "myinputstyle" %><br>
+		<%= f.label(:title, "Комментарий к цене :", :class => "mylabelstyle") %><br />
+		<%= f.text_field :pricecomment, :size => 31, :class => "myinputstyle" %>
+		</p>
 	</div>
 	<div class="grid_5">
 		<%= f.error_messages %>

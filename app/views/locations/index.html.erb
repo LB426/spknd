@@ -1,0 +1,40 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'profiles/menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+
+    <h1>Список населённых пунктов</h1>
+
+    <table>
+      <tr>
+        <th>Название</th>
+        <th>форма</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
+
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%=h location.name %></td>
+        <td><%=h location.form %></td>
+        <td><%= link_to 'Показать', location %></td>
+        <td><%= link_to 'Изменить', edit_location_path(location) %></td>
+        <td><%= link_to 'Удалить', location, :confirm => 'Вы уверены?', :method => :delete %></td>
+        <td><%=h Russian::strftime(location.created_at, "%d %B %Y, %H:%M") -%></td>
+        <td><%=h Russian::strftime(location.updated_at, "%d %B %Y, %H:%M") -%></td>
+      </tr>
+    <% end %>
+    </table>
+
+    <br />
+
+    <%= link_to 'Новый населённый пункт', new_location_path %>
+
+  </div>
+  <%= render :partial => 'profiles/rmenu' %>
+</div>

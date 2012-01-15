@@ -1,0 +1,30 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'profiles/menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+
+    <h1>Добавить новый населённый пункт</h1>
+
+    <% form_for(@location) do |f| %>
+      <%= f.error_messages %>
+
+      <p>
+        <%= f.label :Название %><br />
+        <%= f.text_field :name %>
+      </p>
+      <p>
+        <%= f.label :форма %><br />
+        <%= f.text_field :form %>
+      </p>
+      <p>
+        <%= f.submit 'Добавить' %>
+      </p>
+    <% end %>
+
+    <%= link_to 'Назад', locations_path %>
+
+  </div>
+  <%= render :partial => 'profiles/rmenu' %>
+</div>

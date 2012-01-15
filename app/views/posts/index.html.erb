@@ -1,110 +1,74 @@
 <% content_for(:menu) do %>
 	<%= render :partial => 'menu' %>
 <% end %>
+
 <div style="width: 1000px; margin: 0 auto;">
 <ul class="sf-menu">
-    <li>
+  <li>
     <a href="/posts/nedvjs" id="house">Недвижимость</a>
-		<ul>
+    <ul>
+      <% @real_estate_category.product_sections.each do |section| %>
+        <li>
+          <a href="#"><%= section.section -%></a>
+          <ul>
+            <% section.product_sub_sections.each do |sub_section| %>
+              <li><a href="#"><%= sub_section.subsection -%></a></li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+<!--		<ul>
 			<li>
 				<a href="/posts/kvarts">Квартиры</a>
-							<ul>
-							<li>
-								<a href="#">Новостройки</a>
-							</li>
-							<li>
-								<a href="#">Комнаты</a>
-							</li>
-							<li>
-								<a href="#">1 комнатные</a>
-							</li>
-							<li>
-								<a href="#">2-х комнатные</a>
-							</li>
-							<li>
-								<a href="#">3-х и более комнатные</a>
-							</li>
-							</ul>
+				<ul>
+          <li><a href="#">Новостройки</a></li>
+          <li><a href="#">Комнаты</a></li>
+          <li><a href="#">1 комнатные</a></li>
+          <li><a href="#">2-х комнатные</a></li>
+          <li><a href="#">3-х и более комнатные</a></li>
+        </ul>
 			</li>
-            <li>
-                <a href="/posts/gruzov">Домовладения</a>
-							<ul>
-							<li>
-								<a href="#">до 50 м²</a>
-							</li>
-							<li>
-								<a href="#">до 100 м²</a>
-							</li>
-							<li>
-								<a href="#">до 150 м²</a>
-							</li>
-							<li>
-								<a href="#">до 300 м²</a>
-							</li>
-							<li>
-								<a href="#">свыше 300 м²</a>
-							</li>
-							</ul>
-				
-            </li>
-            <li>
+      <li>
+        <a href="/posts/gruzov">Домовладения</a>
+        <ul>
+					<li><a href="#">до 50 м²</a></li>
+					<li><a href="#">до 100 м²</a></li>
+					<li><a href="#">до 150 м²</a></li>
+					<li><a href="#">до 300 м²</a></li>
+					<li><a href="#">свыше 300 м²</a></li>
+				</ul>
+      </li>
+      <li>
 				<a href="/posts/kommers">Участки, дачи, гаражи</a>
-							<ul>
-							<li>
-								<a href="#">Участки</a>
-							</li>
-							<li>
-								<a href="#">Дачи</a>
-							</li>
-							<li>
-								<a href="#">Гаражи</a>
-							</li>
-						</ul>
+				<ul>
+				  <li><a href="#">Участки</a></li>
+  				<li><a href="#">Дачи</a></li>
+  				<li><a href="#">Гаражи</a></li>
+			  </ul>
 			</li>
 			<li>
-				<a href="/posts/zemuch">Комерческая</a>
-							<ul>
-							<li>
-								<a href="#">Магазины</a>
-							</li>
-							<li>
-								<a href="#">Офисы</a>
-							</li>
-							<li>
-								<a href="#">Склады</a>
-							</li>
-							<li>
-								<a href="#">Прочее</a>
-							</li>
-						</ul>
-			</li>
-			<li>
-				<a href="/posts/arenda">Аренда</a>
-							<ul>
-							<li>
-								<a href="#">Квартиры</a>
-							</li>
-							<li>
-								<a href="#">Домовладения</a>
-							</li>
-							<li>
-								<a href="#">Гаражи</a>
-							</li>
-							<li>
-								<a href="#">Офисы</a>
-							</li>
-							<li>
-								<a href="#">Магазины</a>
-							</li>
-							<li>
-								<a href="#">Склады</a>
-							</li>
-							<li>
-								<a href="#">Прочее</a>
-							</li>
-						    </ul>
-			</li>
-		</ul>
+			  <a href="/posts/zemuch">Комерческая</a>
+  			<ul>
+  				<li><a href="#">Магазины</a></li>
+  				<li><a href="#">Офисы</a></li>
+  				<li><a href="#">Склады</a></li>
+  				<li><a href="#">Прочее</a></li>
+  			</ul>
+	    </li>
+	    <li>
+		    <a href="/posts/arenda">Аренда</a>
+				<ul>
+					<li><a href="#">Квартиры</a></li>
+					<li><a href="#">Домовладения</a></li>
+					<li><a href="#">Гаражи</a></li>
+					<li><a href="#">Офисы</a></li>
+					<li><a href="#">Магазины</a></li>
+					<li><a href="#">Склады</a></li>
+					<li><a href="#">Прочее</a></li>
+				</ul>
+	    </li>
+	  </ul> -->
 	</li>
 	<li>
 		<a href="/posts/autos" id="car">Транспорт</a>
@@ -116,7 +80,7 @@
 					<a href="#">Грузовые, автобусы, спец. техника</a>
 				</li>
 				<li>
-					 <a href="#">Мотоцыклы, снегоходы</a>
+					 <a href="#">Мотоциклы, снегоходы</a>
 				</li>
 				<li>
 					 <a href="#">Водный транспорт</a>
@@ -127,289 +91,288 @@
 			</ul>
     </li>
 	<li>
-	    <a href="/posts/appliances" id="tehnika">Предметы быта</a>
+  <a href="/posts/appliances" id="tehnika">Предметы быта</a>
+	<ul>
+		<li>
+			<a href="#">Электроника</a>
 			<ul>
 				<li>
-					<a href="#">Электроника</a>
-								<ul>
-								<li>
-									<a href="#">Аудио/видео</a>
-								</li>
-								<li>
-									 <a href="#">Компьютеры и комплектующие</a>
-								</li>
-								<li>
-									 <a href="#">Ноутбуки, аксесуары</a>
-								</li>
-								<li>
-									 <a href="#">Планшетные ПК, электронные книги, КПК</a>
-								</li>
-								<li>
-									 <a href="#">Телефоны</a>
-								</li>
-								<li>
-									 <a href="#">Фототехника</a>
-								</li>
-								<li>
-									 <a href="#">Игровые приставки</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
+					<a href="#">Аудио/видео</a>
 				</li>
 				<li>
-
-					 <a href="/posts/kitchen">Бытовая техника</a>
-								<ul>
-								<li>
-									<a href="#">Холодильники</a>
-								</li>
-								<li>
-									 <a href="#">СВЧ печи</a>
-								</li>
-								<li>
-									 <a href="#">Газовые печи, вытяжки</a>
-								</li>
-								<li>
-									 <a href="#">Посудомоечные машины</a>
-								</li>
-								<li>
-									 <a href="#">Климатические системы</a>
-								</li>
-								<li>
-									 <a href="#">Пылесосы</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
+					 <a href="#">Компьютеры и комплектующие</a>
 				</li>
 				<li>
-					 <a href="/posts/wanny">Одежда и обувь</a>
-								<ul>
-								<li>
-									<a href="#">Женская одежда и обувь</a>
-								</li>
-								<li>
-									 <a href="#">Мужская одежда и обувь</a>
-								</li>
-								<li>
-									 <a href="#">Ремонт/пошив одежды, обуви</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
+					 <a href="#">Ноутбуки, аксесуары</a>
 				</li>
 				<li>
-					 <a href="/posts/refreg">Для детей</a>
-								<ul>
-								<li>
-									<a href="#">Кроватки</a>
-								</li>
-								<li>
-									 <a href="#">Коляски</a>
-								</li>
-								<li>
-									 <a href="#">Игрушки</a>
-								</li>
-								<li>
-									<a href="#">Продукты</a>
-								</li>
-								<li>
-									<a href="#">Одежда</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
+					 <a href="#">Планшетные ПК, электронные книги, КПК</a>
 				</li>
 				<li>
-					 <a href="/posts/computers">Мебель</a>
-								<ul>
-								<li>
-									<a href="#">Столы, стулья</a>
-								</li>
-								<li>
-									 <a href="#">Стенки, шкафы</a>
-								</li>
-								<li>
-									 <a href="#">Кухонная мебель</a>
-								</li>
-								<li>
-									<a href="#">Диваны, кровати, кресла</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
+					 <a href="#">Телефоны</a>
 				</li>
 				<li>
-					 <a href="/posts/computers">Украшения и подарки</a>
-								<ul>
-								<li>
-									<a href="#">Бижутерия</a>
-								</li>
-								<li>
-									 <a href="#">Золото, серебро</a>
-								</li>
-								<li>
-									 <a href="#">Антиквариат, нумизматика</a>
-								</li>
-								<li>
-									<a href="#">Посиду, фарфор, хрусталь</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
+					 <a href="#">Фототехника</a>
 				</li>
 				<li>
-					<a href="#">Отдам даром</a>
+					 <a href="#">Игровые приставки</a>
+				</li>
+				<li>
+					<a href="#">Прочее</a>
 				</li>
 			</ul>
+		</li>
+		<li>
+			 <a href="/posts/kitchen">Бытовая техника</a>
+		   <ul>
+		      <li>
+            <a href="#">Холодильники</a>
+          </li>
+          <li>
+            <a href="#">СВЧ печи</a>
+          </li>
+          <li>
+            <a href="#">Газовые печи, вытяжки</a>
+          </li>
+          <li>
+            <a href="#">Посудомоечные машины</a>
+          </li>
+          <li>
+            <a href="#">Климатические системы</a>
+          </li>
+          <li>
+            <a href="#">Пылесосы</a>
+          </li>
+          <li>
+            <a href="#">Прочее</a>
+          </li>
+			 </ul>
+		</li>
+		<li>
+			 <a href="/posts/wanny">Одежда и обувь</a>
+					<ul>
+						<li>
+							<a href="#">Женская одежда и обувь</a>
+						</li>
+						<li>
+							 <a href="#">Мужская одежда и обувь</a>
+						</li>
+						<li>
+							 <a href="#">Ремонт/пошив одежды, обуви</a>
+						</li>
+						<li>
+							<a href="#">Прочее</a>
+						</li>
+					</ul>
+		</li>
+		<li>
+			 <a href="/posts/refreg">Для детей</a>
+					<ul>
+						<li>
+							<a href="#">Кроватки</a>
+						</li>
+						<li>
+							 <a href="#">Коляски</a>
+						</li>
+						<li>
+							 <a href="#">Игрушки</a>
+						</li>
+						<li>
+							<a href="#">Продукты</a>
+						</li>
+						<li>
+							<a href="#">Одежда</a>
+						</li>
+						<li>
+							<a href="#">Прочее</a>
+						</li>
+					</ul>
+		</li>
+		<li>
+			 <a href="/posts/computers">Мебель</a>
+					<ul>
+						<li>
+							<a href="#">Столы, стулья</a>
+						</li>
+						<li>
+							 <a href="#">Стенки, шкафы</a>
+						</li>
+						<li>
+							 <a href="#">Кухонная мебель</a>
+						</li>
+						<li>
+							<a href="#">Диваны, кровати, кресла</a>
+						</li>
+						<li>
+							<a href="#">Прочее</a>
+						</li>
+					</ul>
+		</li>
+		<li>
+			 <a href="/posts/computers">Украшения и подарки</a>
+					<ul>
+						<li>
+							<a href="#">Бижутерия</a>
+						</li>
+						<li>
+							 <a href="#">Золото, серебро</a>
+						</li>
+						<li>
+							 <a href="#">Антиквариат, нумизматика</a>
+						</li>
+						<li>
+							<a href="#">Посиду, фарфор, хрусталь</a>
+						</li>
+						<li>
+							<a href="#">Прочее</a>
+						</li>
+					</ul>
+		</li>
+		<li>
+			<a href="#">Отдам даром</a>
+		</li>
+  </ul>
 	</li>
 	<li>
 		<a href="/posts/uslugi" id="uslugi">Услуги</a>
-			<ul>
-				<li>
-					<a href="#">Юридические</a>
-								<ul>
-								<li>
-									<a href="#">Защита прав</a>
-								</li>
-								<li>
-									 <a href="#">Представительство интересов в суде</a>
-								</li>
-								<li>
-									 <a href="#">Сопровождение сделок</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
-				</li>
-				<li>
-					<a href="/posts/medical">Красота и здоровье</a>
-								<ul>
-								<li>
-									<a href="#">Наращивание ногтей</a>
-								</li>
-								<li>
-									 <a href="#">Наращивание волос</a>
-								</li>
-								<li>
-									 <a href="#">Парикмахерские</a>
-								</li>
-								<li>
-									 <a href="#">Косметологические услуги</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
-				</li>
-				<li>
-					<a href="#">Ищу/предлагаю работу</a>
-								<ul>
-								<li>
-									<a href="#">Ищу работу</a>
-								</li>
-								<li>
-									<a href="#">Предлогаю работу</a>
-								</li>
-							</ul>
-				</li>
-				<li>
-					<a href="#">Строительство</a>
-								<ul>
-								<li>
-									<a href="#">Фундамент, стены</a>
-								</li>
-								<li>
-									 <a href="#">Штукатурка, стяжка</a>
-								</li>
-								<li>
-									 <a href="#">Крыша, окна</a>
-								</li>
-								<li>
-									 <a href="#">Отделка дизайн</a>
-								</li>
-								<li>
-									 <a href="#">Инструмент, крепёж</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
-				</li>
-				<li>
-					<a href="#">Видео-фото съёмка</a>
-				</li>
-			</ul>
+		<ul>
+			<li>
+				<a href="#">Юридические</a>
+						<ul>
+							<li>
+								<a href="#">Защита прав</a>
+							</li>
+							<li>
+								 <a href="#">Представительство интересов в суде</a>
+							</li>
+							<li>
+								 <a href="#">Сопровождение сделок</a>
+							</li>
+							<li>
+								<a href="#">Прочее</a>
+							</li>
+						</ul>
+			</li>
+			<li>
+				<a href="/posts/medical">Красота и здоровье</a>
+						<ul>
+							<li>
+								<a href="#">Наращивание ногтей</a>
+							</li>
+							<li>
+								 <a href="#">Наращивание волос</a>
+							</li>
+							<li>
+								 <a href="#">Парикмахерские</a>
+							</li>
+							<li>
+								 <a href="#">Косметологические услуги</a>
+							</li>
+							<li>
+								<a href="#">Прочее</a>
+							</li>
+						</ul>
+			</li>
+			<li>
+				<a href="#">Ищу/предлагаю работу</a>
+						<ul>
+							<li>
+								<a href="#">Ищу работу</a>
+							</li>
+							<li>
+								<a href="#">Предлогаю работу</a>
+							</li>
+						</ul>
+			</li>
+			<li>
+				<a href="#">Строительство</a>
+						<ul>
+							<li>
+								<a href="#">Фундамент, стены</a>
+							</li>
+							<li>
+								 <a href="#">Штукатурка, стяжка</a>
+							</li>
+							<li>
+								 <a href="#">Крыша, окна</a>
+							</li>
+							<li>
+								 <a href="#">Отделка дизайн</a>
+							</li>
+							<li>
+								 <a href="#">Инструмент, крепёж</a>
+							</li>
+							<li>
+								<a href="#">Прочее</a>
+							</li>
+						</ul>
+			</li>
+			<li>
+				<a href="#">Видео-фото съёмка</a>
+			</li>
+		</ul>
 	</li>
 	<li class="left_drop">
 		<a href="/posts/raznoe" id="box">Разное</a>
-			<ul>
-				<li>
-					<a href="#">Домашние животные</a>
-								<ul>
-								<li>
-									<a href="#">Кошки, собаки</a>
-								</li>
-								<li>
-									 <a href="#">Птицы</a>
-								</li>
-								<li>
-									 <a href="#">Другие животные</a>
-								</li>
-								<li>
-									<a href="#">Корма</a>
-								</li>
-							</ul>
-				</li>
-				<li>
-					<a href="#">Личное подсобное хозяйство</a>
-								<ul>
-								<li>
-									<a href="#">Птица, яйца, молоко</a>
-								</li>
-								<li>
-									 <a href="#">Мясо, шкуры</a>
-								</li>
-								<li>
-									 <a href="#">Фрукты, овощи</a>
-								</li>
-								<li>
-									<a href="#">Корма</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
-				</li>
-				<li>
-					<a href="#">Развлечения</a>
-								<ul>
-								<li>
-									<a href="#">Экскурсии</a>
-								</li>
-								<li>
-									 <a href="#">Праздники</a>
-								</li>
-								<li>
-									 <a href="#">Активный отдых</a>
-								</li>
-								<li>
-									<a href="#">Прочее</a>
-								</li>
-							</ul>
-				</li>
-			</ul>
+		<ul>
+			<li>
+				<a href="#">Домашние животные</a>
+						<ul>
+							<li>
+								<a href="#">Кошки, собаки</a>
+							</li>
+							<li>
+								 <a href="#">Птицы</a>
+							</li>
+							<li>
+								 <a href="#">Другие животные</a>
+							</li>
+							<li>
+								<a href="#">Корма</a>
+							</li>
+						</ul>
+			</li>
+			<li>
+				<a href="#">Личное подсобное хозяйство</a>
+						<ul>
+							<li>
+								<a href="#">Птица, яйца, молоко</a>
+							</li>
+							<li>
+								 <a href="#">Мясо, шкуры</a>
+							</li>
+							<li>
+								 <a href="#">Фрукты, овощи</a>
+							</li>
+							<li>
+								<a href="#">Корма</a>
+							</li>
+							<li>
+								<a href="#">Прочее</a>
+							</li>
+						</ul>
+			</li>
+			<li>
+				<a href="#">Развлечения</a>
+						<ul>
+							<li>
+								<a href="#">Экскурсии</a>
+							</li>
+							<li>
+								 <a href="#">Праздники</a>
+							</li>
+							<li>
+								 <a href="#">Активный отдых</a>
+							</li>
+							<li>
+								<a href="#">Прочее</a>
+							</li>
+						</ul>
+			</li>
+		</ul>
 	</li>	
 </ul>
-
 </div>
+
 <div class="clear"></div>
 <%= render :partial => 'posts' %>
