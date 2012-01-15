@@ -1,4 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :locations
+
+  map.resources :product_sub_sections
+
+  map.resources :product_sections
+
+  map.resources :product_categories
+
   map.create_rassylka 'profiles/rassylka/create', :controller => 'profiles', :action => 'rassylka_create'
   map.new_rassylka 'profiles/rassylka/new', :controller => 'profiles', :action => 'rassylka_new'
   
