@@ -1,0 +1,40 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'profiles/menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+    
+    <h1>Список разделов</h1>
+
+    <table>
+      <tr>
+        <th>Категория</th>
+        <th>Раздел</th>
+        <th>&nbsp</th>
+        <th>&nbsp</th>
+        <th>&nbsp</th>
+        <th>создано</th>
+        <th>изменено</th>
+      </tr>
+
+    <% @product_sections.each do |product_section| %>
+      <tr>
+        <td><%=h ProductCategory.find(product_section.product_category_id).category %></td>
+        <td><%=h product_section.section %></td>
+        <td><%= link_to 'Показать', product_section %></td>
+        <td><%= link_to 'Изменить', edit_product_section_path(product_section) %></td>
+        <td><%= link_to 'Удалить', product_section, :confirm => 'Are you sure?', :method => :delete %></td>
+        <td><%=h Russian::strftime(product_section.created_at, "%d %B %Y, %H:%M") -%></td>
+        <td><%=h Russian::strftime(product_section.updated_at, "%d %B %Y, %H:%M") -%></td>
+      </tr>
+    <% end %>
+    </table>
+
+    <br />
+
+    <%= link_to 'Новый раздел', new_product_section_path %>
+
+  </div>
+  <%= render :partial => 'profiles/rmenu' %>
+</div>

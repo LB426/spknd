@@ -24,9 +24,25 @@ class ApplicationController < ActionController::Base
   def require_user
     unless current_user
       store_location
-      flash[:notice] = "You must be logged in to access this page"
+      flash[:notice] = "Вы должны зарегистрироваться чтобы получить доступ к этой странице"
       redirect_to root_url
       return false
+    end
+  end
+  
+  def require_user_admin
+    unless current_user
+      store_location
+      flash[:notice] = "Вы должны зарегистрироваться чтобы получить доступ к этой странице"
+      redirect_to root_url
+      return false
+    else
+      unless current_user.groups =~ /manager/
+        store_location
+        flash[:notice] = "Вы должны быть администратором чтобы получить доступ к этой странице"
+        redirect_to root_url
+        return false
+      end
     end
   end
   

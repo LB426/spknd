@@ -1,0 +1,19 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'profiles/menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+
+    <p>
+      <b>Категория товара:</b>
+      <%=h @product_category.category %>
+    </p>
+
+
+    <%= link_to 'Редактировать', edit_product_category_path(@product_category) %> |
+    <%= link_to 'Назад', product_categories_path %>
+    
+  </div>
+  <%= render :partial => 'profiles/rmenu' %>
+</div>

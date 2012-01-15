@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  subsection: MyString
+  product_category_id: 1
+  product_section_id: 1
+
+two:
+  subsection: MyString
+  product_category_id: 1
+  product_section_id: 1

@@ -6,7 +6,9 @@ class PostsController < ApplicationController
     @avtos = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 2"
     @byttechs = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 3"
     @uslugs = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 4"
-    @raznoes = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 5"    
+    @raznoes = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 5"
+    
+    @real_estate_category = ProductCategory.find_by_category( "Недвижимость", :order => 'id ASC')
   end
   
   def show
@@ -74,7 +76,7 @@ class PostsController < ApplicationController
     when /ostalnoe/
         @posts = Post.searchbyrazd(5,5,page)
     when /show/
-        if "" != params[:search]
+        unless params[:search].nil?
           @posts = Post.searchbyNameAndContent( params[:search], page)
         else
           redirect_to posts_path

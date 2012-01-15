@@ -1,0 +1,26 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'profiles/menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+
+    <h1>Добавить новую категорию товаров</h1>
+
+    <% form_for(@product_category) do |f| %>
+      <%= f.error_messages %>
+
+      <p>
+        <%= f.label :Категория %><br />
+        <%= f.text_field :category %>
+      </p>
+      <p>
+        <%= f.submit 'Добавить' %>
+      </p>
+    <% end %>
+
+    <%= link_to 'Назад', product_categories_path %>
+    
+  </div>
+  <%= render :partial => 'profiles/rmenu' %>
+</div>

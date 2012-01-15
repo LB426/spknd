@@ -1,0 +1,24 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'profiles/menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+
+    <p>
+      <b>Название:</b>
+      <%=h @location.name %>
+    </p>
+
+    <p>
+      <b>Форма:</b>
+      <%=h @location.form %>
+    </p>
+
+
+    <%= link_to 'Изменить', edit_location_path(@location) %> |
+    <%= link_to 'Назад', locations_path %>
+
+  </div>
+  <%= render :partial => 'profiles/rmenu' %>
+</div>

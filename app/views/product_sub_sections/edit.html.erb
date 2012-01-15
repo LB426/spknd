@@ -1,0 +1,45 @@
+<% content_for(:menu) do %>
+	<%= render :partial => 'profiles/menu' %>
+<% end %>
+
+<div class="container_16">
+  <div class="grid_13 alpha">
+
+    <h1>Редактировать подразделы</h1>
+
+    <% form_for(@product_sub_section) do |f| %>
+      <%= f.error_messages %>
+      
+      <!--<p>
+        <%= f.label :Категория %><br />
+        <%= f.text_field :product_category_id %>
+      </p>-->
+      <p>
+        <%= f.label :Категория %><br />
+        <%= f.select :product_category_id, @product_categories.collect {|p| [ p.category, p.id ]}, { :include_blank => "Выберите категорию" } %>
+      </p>
+      
+      <!--<p>
+        <%= f.label :Раздел %><br />
+        <%= f.text_field :product_section_id %>
+      </p>-->
+      <p>
+        <%= f.label :Раздел %><br />
+        <%= f.select :product_section_id, @product_sections.collect {|p| [ p.section, p.id ]}, { :include_blank => "Выберите раздел" } %>
+      </p>
+      
+      <p>
+        <%= f.label :Подраздел %><br />
+        <%= f.text_field :subsection %>
+      </p>
+      <p>
+        <%= f.submit 'Изменить' %>
+      </p>
+    <% end %>
+
+    <%= link_to 'Показать', @product_sub_section %> |
+    <%= link_to 'Назад', product_sub_sections_path %>
+
+  </div>
+  <%= render :partial => 'profiles/rmenu' %>
+</div>
