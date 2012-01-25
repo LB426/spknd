@@ -164,7 +164,7 @@
 }
 
 .container_16 .grid_13 {
-	width: 760px;
+	width: 755px;
 }
 
 .container_16 .grid_14 {
@@ -626,3 +626,8 @@
 *:first-child+html .clearfix {
 	zoom: 1;
 }
+.grid_3.inf_subscribe  {width: 166px; border: 1px solid #79C105; border-radius: 5px; padding: 2px; background: #79C105; box-shadow:1px 1px 3px #555; margin-bottom:10px;}
+.grid_3.inf_subscribe  h4 {color: #fff; padding: 0px; margin: 0px; text-align: center;}
+.grid_3.inf_subscribe  div { border: 1px solid #ff; border-radius: 5px; padding: 2px; background: #fff; color: #222;}
+.grid_3.inf_subscribe  div p {border-bottom: 1px dashed #79C105;}
+textarea#fp4 {border: 1px solid #79C105; border-radius: 5px;}
