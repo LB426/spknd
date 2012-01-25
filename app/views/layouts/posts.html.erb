@@ -48,28 +48,14 @@
 	<div id="header">
 		<div class="container_12">
 			<div id="logo3" class="grid_3"><h2>Наш Дом</h2>
-<<<<<<< HEAD
-			<div id="select_geo">
-			<form action="select1.php" method="post">
-			   <select size="1" name="place">
-				<option selected value="Тихорецк">Тихорецк</option>
-				<option value="Кропоткин">Кропоткин</option>
-				<option value="Новороссийск">Новороссийск</option>
-				<option value="Краснодар">Краснодар</option>
-			   </select>
-			   <input type="submit" value="Выбрать">
-			  </form>
-			</div>
-			
-			
-=======
+
 			  <div id="select_geo">
   			  <% form_tag '/posts/show', :method => :get do -%>
   			    <%= select_tag :location, options_from_collection_for_select( Location.all, "id", "name") %>
   			    <%= submit_tag 'Выбрать' %>
   			  <% end %>
   			</div>
->>>>>>> 5ae41f85a771962bfc15b9861674c9462bb9b45d
+
 			</div>
 			<div id="headercentr" class="grid_6">
 				<% form_tag '/posts/show', :method => :get do -%>

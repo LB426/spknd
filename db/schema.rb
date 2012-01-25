@@ -123,9 +123,9 @@ ActiveRecord::Schema.define(:version => 20120114155748) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "user_messages", :force => true do |t|
-    t.text     "message",                                          :null => false
-    t.string   "komu",                                             :null => false
-    t.string   "result",     :default => "запущен\320\276"
+    t.text     "message",                                    :null => false
+    t.string   "komu",                                       :null => false
+    t.string   "result",     :default => "запущено"
     t.integer  "numsentmsg", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
