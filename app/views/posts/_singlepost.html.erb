@@ -82,9 +82,8 @@
 	<div style="float: right;">
 		<% if current_user %>
 			<% if post.user_id == current_user.id || /manager/ =~ current_user.groups %>
-		<%= link_to "Изменить", edit_post_path(post) %>
-		&nbsp;
-		<%= link_to "Удалить", destroy_post_path(post) %>
+		  <%= link_to "Изменить", edit_post_path(post), :title => "изменить объявление" %>&nbsp;
+		  <%= link_to "Удалить", post, :confirm => 'Are you sure?', :method => :delete, :title => "удалить объявление" %>
 		<% end %>
 		<% end %>
 	</div>
