@@ -15,15 +15,14 @@
 		<div id="newcatlist">
 			<%= f.label(:razdel, "Раздел :", :class => "mylabelstyle") %>
 			<%= f.select :razdel, "<option value='0'>выберите раздел</option>" %>
-<<<<<<< HEAD
 		</div><br />
 			<%= f.label(:title, "Заголовок объявления:", :class => "mylabelstyle") %><br />
 			<%= f.text_field :name, :size => 41, :class => "myinputstyle" %><br />
 		    <%= f.label(:title, "Текст объявления :", :class => "mylabelstyle") %><br />
 		    <%= f.text_area :content, :cols => 60, :rows => 4, :class => "myinputstyle" %><br />
 			<% fields_for @postfoto do |child_form| %>
-				<%= child_form.label(:title, "Добавить фото в объявление:", :class => "mylabelstyle") %><br />
-				<%= child_form.file_field :photo, :size => 26, :class => "myinputstyle" %>
+			<%= child_form.label(:title, "Добавить фото в объявление:", :class => "mylabelstyle") %><br />
+			<%= child_form.file_field :photo, :size => 26, :class => "myinputstyle" %>
 			<% end %>
 			<p>
 			<div id="form_nedw" style="display: none;">
@@ -57,24 +56,7 @@
 				<label class="mylabelstyle" for="other_contact"> Доп. информация:</label><br /><textarea rows="2" cols="45" name="other_contact"></textarea>
 			  </fieldset>					
 			</p>
-=======
-		</div>
-		<br />
-		<%= f.label(:title, "Заголовок объявления:", :class => "mylabelstyle") %><br />
-		<%= f.text_field :name, :size => 41, :class => "myinputstyle" %><br />
-	  <%= f.label(:title, "Текст объявления :", :class => "mylabelstyle") %><br />
-	  <%= f.text_area :content, :cols => 40, :rows => 8, :class => "myinputstyle" %><br />
-		<% fields_for @postfoto do |child_form| %>
-			<%= child_form.label(:title, "Добавить фото в объявление:", :class => "mylabelstyle") %><br />
-			<%= child_form.file_field :photo, :size => 26, :class => "myinputstyle" %>
-		<% end %>
-		<p>
-		<%= f.label(:title, "Цена, только цифры без пробелов :", :class => "mylabelstyle") %><br />
-		<%= f.text_field :price, :size => 21, :class => "myinputstyle" %><br>
-		<%= f.label(:title, "Комментарий к цене :", :class => "mylabelstyle") %><br />
-		<%= f.text_field :pricecomment, :size => 31, :class => "myinputstyle" %>
-		</p>
->>>>>>> 5ae41f85a771962bfc15b9861674c9462bb9b45d
+
 	</div>
 	<div class="grid_5">
 		<%= f.error_messages %>
