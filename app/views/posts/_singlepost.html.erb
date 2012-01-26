@@ -82,7 +82,9 @@
 	<div style="float: right;">
 		<% if current_user %>
 			<% if post.user_id == current_user.id || /manager/ =~ current_user.groups %>
-		<a href="#">Изменить</a>&nbsp;<a href="#">Удалить</a>
+		<%= link_to "Изменить", edit_post_path(post) %>
+		&nbsp;
+		<%= link_to "Удалить", destroy_post_path(post) %>
 		<% end %>
 		<% end %>
 	</div>
