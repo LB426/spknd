@@ -1,14 +1,62 @@
 class PostsController < ApplicationController
   def index
     page = params[:page] || 1
-    @posts = Post.paginate_by_category 1, :page => page, :order => 'created_at DESC'
-    @nedvij = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 1"
-    @avtos = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 2"
-    @byttechs = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 3"
-    @uslugs = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 4"
-    @raznoes = Post.count_by_sql "SELECT COUNT(*) FROM posts WHERE category = 5"
-    
+
     @real_estate_category = ProductCategory.find_by_category( "Недвижимость", :order => 'id ASC')
+
+    @location_id = "all"
+    @category_id = "all"
+    @section_id = "all"
+    @subsection_id = "all"
+    unless params['location'].nil?
+      unless params['location'].empty?
+        @location_id = Location.find(params['location']).id
+      end
+    end
+    unless params['location_id'].nil?
+      unless params['location_id'].empty?
+        if params['location_id'] != "all"
+          @location_id = params['location_id']
+        end
+      end
+    end
+    unless params['category_id'].nil?
+      unless params['category_id'].empty?
+        @category_id = params['category_id']
+      end
+    end
+    unless params['section_id'].nil?
+      unless params['section_id'].empty?
+        @section_id = params['section_id']
+      end
+    end
+    unless params['subsection_id'].nil?
+      unless params['subsection_id'].empty?
+        @subsection_id = params['subsection_id']
+      end
+    end
+    
+    logger.debug "#{@location_id}+#{@category_id}+#{@section_id}+#{@subsection_id}"
+    
+    case "#{@location_id}+#{@category_id}+#{@section_id}+#{@subsection_id}"
+    when /all\+\d\+all\+all/
+      @posts = Post.paginate_by_category @category_id, :page => page, :order => 'created_at DESC'
+    when /all\+\d\+\d\+all/
+      @posts = Post.search_by_category_and_section(@category_id, @section_id, page)
+    when /all\+\d\+\d\+\d/
+      @posts = Post.search_by_category_and_section_and_subsection(@category_id, @section_id, @subsection_id, page)
+    when /\d\+all\+all\+all/
+      @posts = Post.paginate_by_location_id @location_id, :page => page, :order => 'created_at DESC'
+    when /\d\+\d\+all\+all/
+      @posts = Post.search_by_location_and_category(@location_id, @category_id, page)
+    when /\d\+\d\+\d\+all/
+      @posts = Post.search_by_location_and_category_and_section(@location_id, @category_id, @section_id, page)
+    when /\d\+\d\+\d\+\d/
+      @posts = Post.search_by_location_and_category_and_section_and_subsection(@location_id, @category_id, @section_id, @subsection_id, page)
+    else
+      @posts = Post.paginate_by_location_id 1, :page => page, :order => 'created_at DESC'
+    end
+    
   end
   
   def show

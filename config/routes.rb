@@ -24,6 +24,11 @@ ActionController::Routing::Routes.draw do |map|
   map.posts_profile 'profile/posts', :controller => 'profiles', :action => 'showposts'
   map.sendemail_profile '/profile/sendemail', :controller => 'profiles', :action => 'sendemail'
 
+  map.posts_search 'posts/location/:location_id/category/:category_id/section/:section_id/subsection/:subsection_id', :controller => 'posts', :action => 'index'
+  map.connect 'posts/location/:location_id/category/:category_id/section/:section_id', :controller => 'posts', :action => 'index'
+  map.connect 'posts/location/:location_id/category/:category_id', :controller => 'posts', :action => 'index'
+  map.connect 'posts/location/:location_id', :controller => 'posts', :action => 'index'
+  # map.connect 'posts/categories', :controller => 'posts', :action => 'index'
   map.resources :posts, :has_many => [ :post_comments ]
 
   map.resources :forclients

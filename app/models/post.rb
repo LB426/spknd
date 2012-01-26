@@ -7,6 +7,31 @@ class Post < ActiveRecord::Base
     
 #  attr_accessible :user_id, :name, :content
 
+  def self.search_by_location_and_category(location, category, page)
+    paginate  :per_page => @@per_page, :page => page,
+              :conditions => ['location_id=? AND category=?', "#{location}", "#{category}"], :order => 'updated_at DESC'
+  end
+  
+  def self.search_by_location_and_category_and_section(location, category, section, page)
+    paginate  :per_page => @@per_page, :page => page,
+              :conditions => ['location_id=? AND category=? AND section_id=?', "#{location}", "#{category}", "#{section}"], :order => 'updated_at DESC'
+  end
+
+  def self.search_by_location_and_category_and_section_and_subsection(location, category, section, subsection, page)
+    paginate  :per_page => @@per_page, :page => page,
+              :conditions => ['location_id=? AND category=? AND section_id=? AND sub_section_id=?', "#{location}", "#{category}", "#{section}", "#{subsection}"], :order => 'updated_at DESC'
+  end
+  
+  def self.search_by_category_and_section(category, section, page)
+    paginate  :per_page => @@per_page, :page => page,
+              :conditions => ['category=? AND section_id=?', "#{category}", "#{section}"], :order => 'updated_at DESC'
+  end
+
+  def self.search_by_category_and_section_and_subsection(category, section, subsection, page)
+    paginate  :per_page => @@per_page, :page => page,
+              :conditions => ['category=? AND section_id=? AND sub_section_id=?', "#{category}", "#{section}", "#{subsection}"], :order => 'updated_at DESC'
+  end
+
   def self.searchbycat(category, page)
     paginate  :per_page => 10, :page => page,
               :conditions => ['category=?', "#{category}"], :order => 'created_at DESC'

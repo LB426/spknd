@@ -49,8 +49,12 @@
 		<div class="container_12">
 			<div id="logo3" class="grid_3"><h2>Наш Дом</h2>
 			  <div id="select_geo">
-  			  <% form_tag '/posts/show', :method => :get do -%>
-  			    <%= select_tag :location, options_from_collection_for_select( Location.all, "id", "name") %>
+  			  <% form_tag posts_search_path("all","all","all","all"), :method => :get do -%>
+  			    <% if @location_id == "all" %>
+  			      <%= select_tag :location, options_from_collection_for_select( Location.all, "id", "name") %>
+  			    <% else %>
+  			      <%= select_tag :location, options_from_collection_for_select( Location.all, "id", "name", @location_id) %>
+  			    <% end %>
   			    <%= submit_tag 'Выбрать' %>
   			  <% end %>
   			</div>
