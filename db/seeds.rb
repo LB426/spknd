@@ -5,3 +5,9 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+
+ProductCategory.create([{ :category => 'Недвижимость' }, 
+                        { :category => 'Транспорт' },
+                        { :category => 'Предметы быта' },
+                        { :category => 'Услуги' },
+                        { :category => 'Разное' },])

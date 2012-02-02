@@ -54,7 +54,7 @@ class PostsController < ApplicationController
     when /\d\+\d\+\d\+\d/
       @posts = Post.search_by_location_and_category_and_section_and_subsection(@location_id, @category_id, @section_id, @subsection_id, page)
     else
-      @posts = Post.paginate_by_location_id 1, :page => page, :order => 'created_at DESC'
+      @posts = Post.paginate_by_location_id @real_estate_category.id, :page => page, :order => 'created_at DESC'
     end
     
   end
