@@ -4,6 +4,9 @@ jQuery.ajaxSetup({
 
 $(document).ready(function() {
 	$("#post_razdel").attr("disabled","disabled");
+	$("#post_section_id").attr("disabled","disabled");
+	$("#post_sub_section_id").attr("disabled","disabled");
+	
 	$("#post_category").change(function() {
 		var category = $("option:selected", this).val();
 		if (category == '0') {

@@ -5,17 +5,21 @@
 <% form_for @post, :html => { :multipart => true } do |f| %>
 <div class="container_12">
 	<div class="grid_7">
+	  <div id="location">
+			<%= f.label(:sub_section, "Населённый пункт :", :class => "mylabelstyle") %>
+			<%= f.select :location_id, options_from_collection_for_select( Location.all, "id", "name") %>
+		</div>
 			<%= f.label(:category, "Категория :", :class => "mylabelstyle") %>
-			<%= f.select :category, "<option value='0'>выберите категорию</option>
-									<option value='1'>недвижимость</option>
-									<option value='2'>транспорт</option>
-									<option value='3'>бытовая техника</option>
-									<option value='4'>услуги</option>
-									<option value='5'>разное</option>" %>
+			<%= f.select :category, options_from_collection_for_select( @categories, "id", "category") %>
 		<div id="newcatlist">
-			<%= f.label(:razdel, "Раздел :", :class => "mylabelstyle") %>
-			<%= f.select :razdel, "<option value='0'>выберите раздел</option>" %>
-		</div><br />
+			<%= f.label(:section_id, "Раздел :", :class => "mylabelstyle") %>
+			<%= f.select :section_id, options_from_collection_for_select( @sections, "id", "section") %>
+		</div>
+		<div id="sub_section">
+			<%= f.label(:sub_section_id, "Под раздел :", :class => "mylabelstyle") %>
+			<%= f.select :sub_section_id, options_from_collection_for_select( @subsections, "id", "subsection") %>
+		</div>
+		<br />
 			<%= f.label(:title, "Заголовок объявления:", :class => "mylabelstyle") %><br />
 			<%= f.text_field :name, :size => 41, :class => "myinputstyle" %><br />
 		    <%= f.label(:title, "Текст объявления :", :class => "mylabelstyle") %><br />

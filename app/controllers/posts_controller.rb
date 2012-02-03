@@ -136,6 +136,10 @@ class PostsController < ApplicationController
   end
   
   def new
+    @categories = ProductCategory.all(:order => 'id ASC')
+    @sections = ProductSection.all
+    @subsections = ProductSubSection.all
+    
     @post = current_user.posts.new
     @postfoto = @post.postfotos.new
     if "1" == params[:id] || "2" == params[:id] || "3" == params[:id] || "4" == params[:id] || "5" == params[:id]
