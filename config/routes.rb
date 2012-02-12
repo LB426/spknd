@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+  map.getsubsections '/api/getsubsections', :controller => 'api', :action => 'getsubsections'
+  map.getsections '/api/getsections', :controller => 'api', :action => 'getsections'
+  
   map.resources :locations
 
   map.resources :product_sub_sections

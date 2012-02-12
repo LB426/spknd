@@ -35,4 +35,42 @@ $(document).ready(function() {
 		}
 		return false;
 	});
+	
+	$("#post_category_id").change(function() {
+		var category_id = $("option:selected", this).val();
+		if (category_id == '0'){
+		  $("#post_section_id").attr("disabled","disabled");
+		  $("#post_sub_section_id").attr("disabled","disabled");
+		}else{
+			$("#post_section_id").empty();
+			$("#post_section_id").prepend( $('<option value="0">выберите раздел</option>'));
+			$("#post_section_id :first").attr("selected", "selected");
+			$("#post_section_id").attr("disabled","");
+			$.getJSON('/api/getsections/' + category_id, function(data) {
+				$.each(data, function(i,item){
+					$("#post_section_id").append( '<option value="'+ item.product_section.id + '">' + item.product_section.section + '</option>' );
+				});
+			});
+		}
+		return false;
+	});
+	
+	$("#post_section_id").change(function() {
+		var section_id = $("option:selected", this).val();
+		if (section_id == '0'){
+		  $("#post_sub_section_id").attr("disabled","disabled");
+		}else{
+			$("#post_sub_section_id").empty();
+			$("#post_sub_section_id").prepend( $('<option value="0">выберите подраздел</option>'));
+			$("#post_sub_section_id :first").attr("selected", "selected");
+			$("#post_sub_section_id").attr("disabled","");
+			$.getJSON('/api/getsubsections/' + section_id, function(data) {
+				$.each(data, function(i,item){
+					$("#post_sub_section_id").append( '<option value="'+ item.product_sub_section.id + '">' + item.product_sub_section.subsection + '</option>' );
+				});
+			});
+		}
+		return false;
+	});	
+	
 })

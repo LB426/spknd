@@ -136,9 +136,14 @@ class PostsController < ApplicationController
   end
   
   def new
-    @categories = ProductCategory.all(:order => 'id ASC')
-    @sections = ProductSection.all
-    @subsections = ProductSubSection.all
+    @locations = Location.all(:select => "id, name", :order => 'id ASC')
+    
+    null_category = [ {'category'=>'выберите категорию', 'id'=>0} ].map!{|x| [ x["category"], x["id"] ] }
+    @categories = null_category + ProductCategory.all(:select => "id, category", :order => 'id ASC').map {|x| [ x.category, x.id ] }
+    null_sections = [ {'section'=>'выберите раздел', 'id'=>0} ].map!{|x| [ x["section"], x["id"] ] }
+    @sections = null_sections + ProductSection.all(:select => "id, section", :order => 'id ASC').map!{|x| [ x.section, x.id ] }
+    null_subsections = [ {'subsection'=>'выберите подраздел', 'id'=>0} ].map!{|x| [ x["subsection"], x["id"] ] }
+    @subsections = null_subsections + ProductSubSection.all(:select => "id, subsection", :order => 'id ASC').map!{|x| [ x.subsection, x.id ] }
     
     @post = current_user.posts.new
     @postfoto = @post.postfotos.new

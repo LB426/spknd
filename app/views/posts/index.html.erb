@@ -5,15 +5,15 @@
 <div style="width: 1000px; margin: 0 auto;">
 <ul class="sf-menu">
   <li>
-    <a href="/posts/location/<%= @location_id %>/category/<%= @real_estate_category.id %>" id="house">Недвижимость</a>
+    <a href="/posts/location/<%= @location_id %>/category/<%= @real_estate_category.id %>" id="house">Недвижимость<br>()</a>
     <ul>
       <% @real_estate_category.product_sections.each do |section| %>
         <li>
-          <a href="/posts/location/<%= @location_id %>/category/<%= @real_estate_category.id %>/section/<%= section.id %>"><%= section.section -%></a>
+          <a href="/posts/location/<%= @location_id %>/category/<%= @real_estate_category.id %>/section/<%= section.id %>"><%= section.section -%> ()</a>
           <ul>
             <% section.product_sub_sections.each do |sub_section| %>
               <li>
-                <a href="/posts/location/<%= @location_id %>/category/<%= @real_estate_category.id %>/section/<%= section.id %>/subsection/<%= sub_section.id %>"><%= sub_section.subsection -%></a>
+                <a href="/posts/location/<%= @location_id %>/category/<%= @real_estate_category.id %>/section/<%= section.id %>/subsection/<%= sub_section.id %>"><%= sub_section.subsection -%> ()</a>
               </li>
             <% end %>
           </ul>
