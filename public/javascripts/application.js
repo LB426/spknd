@@ -6,6 +6,7 @@ $(document).ready(function() {
 	$("#post_razdel").attr("disabled","disabled");
 	$("#post_section_id").attr("disabled","disabled");
 	$("#post_sub_section_id").attr("disabled","disabled");
+	$("#form_nedw").hide();
 	
 	$("#post_category").change(function() {
 		var category = $("option:selected", this).val();
@@ -38,6 +39,11 @@ $(document).ready(function() {
 	
 	$("#post_category_id").change(function() {
 		var category_id = $("option:selected", this).val();
+		if (category_id == '1'){
+		  $("#form_nedw").show();
+		}else{
+		  $("#form_nedw").hide();
+		}
 		if (category_id == '0'){
 		  $("#post_section_id").attr("disabled","disabled");
 		  $("#post_sub_section_id").attr("disabled","disabled");
@@ -51,6 +57,9 @@ $(document).ready(function() {
 					$("#post_section_id").append( '<option value="'+ item.product_section.id + '">' + item.product_section.section + '</option>' );
 				});
 			});
+			$("#post_sub_section_id").empty();
+			$("#post_sub_section_id").prepend( $('<option value="0">выберите подраздел</option>'));
+			$("#post_sub_section_id").attr("disabled","disabled");
 		}
 		return false;
 	});

@@ -27,42 +27,44 @@
 		    <%= f.label(:title, "Текст объявления :", :class => "mylabelstyle") %><br />
 		    <%= f.text_area :content, :cols => 60, :rows => 4, :class => "myinputstyle" %><br />
 			<% fields_for @postfoto do |child_form| %>
-			<%= child_form.label(:title, "Добавить фото в объявление:", :class => "mylabelstyle") %><br />
+			<%= child_form.label(:title, "Добавить фото в объявление:", :class => "mylabelstyle") %>
+			<br />
 			<%= child_form.file_field :photo, :size => 26, :class => "myinputstyle" %>
 			<% end %>
 			<p>
-			<div id="form_nedw" style="display: none;">
-			<fieldset class="myinputstyle" style="padding: 5px;">
-				<legend style="margin-left: 30px;">Описание объекта</legend>
-			<label class="mylabelstyle" for="rooms">Комнат :</label>
-				<select id="rooms" name="post[rooms]">
-				<option value="0">кол-во комнат</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5+</option>
-				</select>
-				<label class="mylabelstyle" for="floor"> Этаж/этажность :</label><input type="text" size="4" value="—/—" name="floor"/>
-				<br />
-			<p class="mylabelstyle">Площадь:							
-				<input type="text" size="4" value="общая" name="square"/> м²
-				<input type="text" size="4" value="жилая" name="living_space"/> м²
-				</p>
-			
+			<div id="form_nedw">
+  			<fieldset class="myinputstyle" style="padding: 5px;">
+  			<legend style="margin-left: 30px;">Описание объекта</legend>
+  			<label class="mylabelstyle" for="rooms">Комнат :</label>
+  			<select id="rooms" name="post[rooms]">
+  				<option value="0">кол-во комнат</option>
+  				<option value="1">1</option>
+  				<option value="2">2</option>
+  				<option value="3">3</option>
+  				<option value="4">4</option>
+  				<option value="5">5+</option>
+  			</select>
+  			<label class="mylabelstyle" for="floor">Этаж/этажность :</label>
+  			<input type="text" size="4" value="—/—" name="floor"/>
+  			<br />
+  		  <p class="mylabelstyle">Площадь:							
+  				<input type="text" size="4" value="общая" name="square"/>м²
+  				<input type="text" size="4" value="жилая" name="living_space"/>м²
+  			</p>
 			</div>
 			<%= f.label(:title, "Цена, только цифры без пробелов :", :class => "mylabelstyle") %><br />
-			<%= f.text_field :price, :size => 21, :class => "myinputstyle" %><br>
-			<%= f.label(:title, "Комментарий к цене :", :class => "mylabelstyle") %><br />
-			<%= f.text_field :pricecomment, :size => 31, :class => "myinputstyle" %>
-			  <fieldset class="myinputstyle" style="padding: 5px;">				
+			<%= f.text_field :price, :size => 21, :class => "myinputstyle" %>
+			<%= f.select :pricecomment, options_for_select([ {'exchange'=>'рубли', 'id'=>'rub'},{'exchange'=>'доллары', 'id'=>'dollar'} ].map!{|x| [ x["exchange"], x["id"] ] }) %>
+			<fieldset class="myinputstyle" style="padding: 5px;">				
 				<legend style="margin-left: 30px;">Контактные данные</legend>
-				<label class="mylabelstyle" for="tel_num"> Телефон:</label><input type="text" size="12" value=" " name="tel_num"/>
-				<label class="mylabelstyle" for="email"> email:</label><input type="text" size="30" value=" " name="email"/><br />
-				<label class="mylabelstyle" for="other_contact"> Доп. информация:</label><br /><textarea rows="2" cols="45" name="other_contact"></textarea>
-			  </fieldset>					
+				<label class="mylabelstyle" for="tel_num">Телефон:</label>
+				<input type="text" size="12" value=" " name="tel_num"/>
+				<label class="mylabelstyle" for="email">email:</label>
+				<input type="text" size="30" value=" " name="email"/><br />
+				<label class="mylabelstyle" for="other_contact">Доп. информация:</label><br />
+				<textarea rows="2" cols="45" name="other_contact"></textarea>
+		  </fieldset>
 			</p>
-
 	</div>
 	<div class="grid_5">
 		<%= f.error_messages %>

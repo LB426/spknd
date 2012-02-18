@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   def index
     page = params[:page] || 1
 
-    @real_estate_category = ProductCategory.find_by_category( "Недвижимость", :order => 'id ASC')
+    @categories = ProductCategory.all( :order => 'id ASC' )
 
     @location_id = "all"
     @category_id = "all"
@@ -36,8 +36,6 @@ class PostsController < ApplicationController
       end
     end
     
-    logger.debug "#{@location_id}+#{@category_id}+#{@section_id}+#{@subsection_id}"
-    
     case "#{@location_id}+#{@category_id}+#{@section_id}+#{@subsection_id}"
     when /all\+\d\+all\+all/
       @posts = Post.paginate_by_category @category_id, :page => page, :order => 'created_at DESC'
@@ -54,7 +52,8 @@ class PostsController < ApplicationController
     when /\d\+\d\+\d\+\d/
       @posts = Post.search_by_location_and_category_and_section_and_subsection(@location_id, @category_id, @section_id, @subsection_id, page)
     else
-      @posts = Post.paginate_by_location_id @real_estate_category.id, :page => page, :order => 'created_at DESC'
+      @category = ProductCategory.find_by_category( "Недвижимость", :order => 'id ASC')
+      @posts = Post.paginate_by_location_id @category.id, :page => page, :order => 'created_at DESC'
     end
     
   end
