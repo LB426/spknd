@@ -54,7 +54,7 @@
 			</div>
 			<%= f.label(:title, "Цена, только цифры без пробелов :", :class => "mylabelstyle") %><br />
 			<%= f.text_field :price, :size => 21, :class => "myinputstyle" %>
-			<%= f.select :pricecomment, options_for_select([ {'exchange'=>'рубли', 'id'=>'rub'},{'exchange'=>'доллары', 'id'=>'dollar'} ].map!{|x| [ x["exchange"], x["id"] ] }) %>
+			<%= f.select :pricecomment, options_for_select([ {'exchange'=>'рубли', 'id'=>'rub'},{'exchange'=>'рубли, торг уместен', 'id'=>'rubtorg'},{'exchange'=>'доллары', 'id'=>'dollar'} ].map!{|x| [ x["exchange"], x["id"] ] }) %>
 			<fieldset class="myinputstyle" style="padding: 5px;">				
 				<legend style="margin-left: 30px;">Контактные данные</legend>
 				<label class="mylabelstyle" for="tel_num">Телефон:</label>
