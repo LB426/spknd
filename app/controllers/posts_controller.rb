@@ -143,7 +143,7 @@ class PostsController < ApplicationController
     @sections = null_sections + ProductSection.all(:select => "id, section", :order => 'id ASC').map!{|x| [ x.section, x.id ] }
     null_subsections = [ {'subsection'=>'выберите подраздел', 'id'=>0} ].map!{|x| [ x["subsection"], x["id"] ] }
     @subsections = null_subsections + ProductSubSection.all(:select => "id, subsection", :order => 'id ASC').map!{|x| [ x.subsection, x.id ] }
-    
+
     @post = current_user.posts.new
     @postfoto = @post.postfotos.new
     if "1" == params[:id] || "2" == params[:id] || "3" == params[:id] || "4" == params[:id] || "5" == params[:id]
@@ -161,18 +161,17 @@ class PostsController < ApplicationController
     @post = current_user.posts.create(params[:post])
     
     if @post.save
-      flash[:notice] = "Successfully created post."
+      flash[:notice] = "Объявление создано успешно!"
       if params[:postfoto] != nil
         @postfoto = @post.postfotos.new(params[:postfoto])
         @postfoto.user_id = current_user
         if @postfoto.save
           flash[:notice] = "Фотография успешно добавлена."
         else
-          flash[:notice] = "NO Successfully created postfoto."
+          flash[:notice] = "Фотография не добавлена."
         end
       end
       respond_to do |format|
-          #format.html { redirect_to @post }
           flash[:notice] = "Объявление успешно добавлено."
           format.html { redirect_to edit_post_path(@post) }
           format.js
@@ -182,8 +181,9 @@ class PostsController < ApplicationController
     end
     
     rescue => err
-      flash[:notice] = "#{err}"
-      redirect_to posts_path
+      logger.debug "\nERROR in PostsController create: #{err}\n"
+      flash[:notice] = "Внимание! Объявление создать НЕ удалось!"
+      redirect_to new_post_path
   end
   
   def edit
@@ -194,7 +194,16 @@ class PostsController < ApplicationController
     end
     @postfoto = @post.postfotos.new
     @postfotos = @post.postfotos.find(:all)
-    
+
+    @locations = Location.all(:select => "id, name", :order => 'id ASC').map {|x| [ x.name.to_s, x.id.to_s ]}
+
+    @categories = ProductCategory.all(:select => "id, category", :order => 'id ASC').map do |x|
+      [ "#{x.category}", "#{x.id}" ]
+    end
+
+    @sections = ProductSection.all(:select => "id, section", :order => 'id ASC').map!{|x| [ x.section.to_s, x.id.to_s ] }
+    @subsections = ProductSubSection.all(:select => "id, subsection", :order => 'id ASC').map!{|x| [ x.subsection.to_s, x.id.to_s ] }
+
     rescue => err
       flash[:notice] = "Authorised PLEASE!!!#{err}"
       redirect_to login_path

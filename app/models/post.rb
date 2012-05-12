@@ -3,7 +3,8 @@ class Post < ActiveRecord::Base
   has_many :postfotos, :dependent => :destroy
   has_many :post_comments, :dependent => :destroy
   cattr_reader :per_page
-    @@per_page = 10
+  @@per_page = 10
+  serialize :options
     
 #  attr_accessible :user_id, :name, :content
 
@@ -72,6 +73,34 @@ class Post < ActiveRecord::Base
       pagenum = pages - page
     end
     return pagenum
+  end
+
+  def location
+    result = ""
+    ss = Location.find_by_id(self.location_id)
+    result = ss.name if ss != nil
+    return result
+  end
+
+  def categorie
+    result = ""
+    ss = ProductCategory.find_by_id(self.category_id)
+    result = ss.category if ss != nil
+    return result
+  end
+
+  def section
+    result = ""
+    ss = ProductSection.find_by_id(self.section_id)
+    result = ss.section if ss != nil
+    return result
+  end
+
+  def sub_section
+    result = ""
+    ss = ProductSubSection.find_by_id(self.sub_section_id)
+    result = ss.subsection if ss != nil
+    return result
   end
 
 end

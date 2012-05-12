@@ -1,15 +1,61 @@
-устанавливаем нужную версию Rails
+Настраиваем серверную часть на одном из клонов RHEL.
+0) базовые установки системы:
+yum groupinstall "Development Tools"
+
+
+1) Установка MySQL
+Для продакшн-сервера вместо Mysql используем Percona Server это аналог Mysql.
+процесс установки такой:
+wget -r -l 1 -nd -A rpm 'http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.21-25.0/RPM/rhel6/x86_64/Percona-Server-client-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm'
+wget -r -l 1 -nd -A rpm 'http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.21-25.0/RPM/rhel6/x86_64/Percona-Server-devel-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm'
+wget -r -l 1 -nd -A rpm 'http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.21-25.0/RPM/rhel6/x86_64/Percona-Server-server-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm'
+wget -r -l 1 -nd -A rpm 'http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.21-25.0/RPM/rhel6/x86_64/Percona-Server-shared-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm'
+wget -r -l 1 -nd -A rpm 'http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.21-25.0/RPM/rhel6/x86_64/Percona-Server-shared-compat-5.5.21-rel25.0.227.rhel6.x86_64.rpm'
+wget -r -l 1 -nd -A rpm 'http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.21-25.0/RPM/rhel6/x86_64/Percona-Server-test-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm'
+sudo rpm -ivh Percona-Server-shared-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm
+sudo rpm -ivh Percona-Server-client-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm
+sudo rpm -ivh Percona-Server-shared-compat-5.5.21-rel25.0.227.rhel6.x86_64.rpm
+sudo rpm -ivh Percona-Server-devel-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm
+sudo rpm -ivh Percona-Server-test-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm
+sudo yum erase mysql-libs-5.1.61-1.el6_2.1.x86_64
+sudo rpm -ivh Percona-Server-server-55-5.5.21-rel25.0.227.rhel6.x86_64.rpm
+sudo service mysql start
+sudo /usr/bin/mysql_secure_installation
+внимательно читаем надписи.
+ВНИМАНИЕ: пароль root при первоначальном запуске пустой!
+
+Для машины разработчика используем родной MySQL из репозитария, ставиться через GUI.
+Если вдруг мы установили перкону на машину разработчика - сносим её так:
+sudo yum erase Percona-Server-test-55-5.5.21-rel25.0.227.rhel6.x86_64
+sudo yum erase Percona-Server-server-55-5.5.21-rel25.0.227.rhel6.x86_64
+sudo yum erase Percona-Server-devel-55-5.5.21-rel25.0.227.rhel6.x86_64
+sudo yum erase Percona-Server-client-55-5.5.21-rel25.0.227.rhel6.x86_64
+sudo yum erase Percona-Server-shared-55-5.5.21-rel25.0.227.rhel6.x86_64
+rpm -e --nodeps Percona-Server-shared-compat-5.5.21-rel25.0.227.rhel6.x86_64
+sudo rm -rf /var/lib/mysql/
+
+2) ставим ImageMagick, ghostscript, Ruby
+bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+rvm list known
+rvm install ree-1.8.7-2012.02
+
+3) устанавливаем нужную версию Rails
+gem install rdoc ;
+gem install -v=2.3.14 rails ;
+gem install -v=2.8.1 mysql ; # если персдавляли БД то и его нужно переставить!
+gem install -v=2.1.5 authlogic ;
+gem install -v=2.3.3 paperclip ;
+gem sources --add 'http://gems.github.com/' ;
+gem install -v=2.3.11 mislav-will_paginate ;
+gem install -v=0.2.7 russian 
 gem update --system 1.6.2
-gem install rdoc
-gem install -v=2.3.14 rails
-gem install -v=2.8.1 mysql
-gem install -v=2.1.5 authlogic
-gem install -v=2.3.3 paperclip
-gem sources --add 'http://gems.github.com/'
-gem install -v=2.3.11 mislav-will_paginate
-gem install -v=0.2.7 russian
+
+4) Запустаем проект:
+cd "каталог проекта"
 rake gems:refresh_specs
-gem install rdoc
+rake db:create
+rake db:migrate
+rake db:seed
 
 Создал ветвь designer для дизайнера, который делает внешний вид.
 

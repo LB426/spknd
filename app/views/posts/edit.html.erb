@@ -1,41 +1,79 @@
-<% content_for(:menu) do %>
-	<%= render :partial => 'emenu' %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#post_section_id").attr("disabled","");
+		$("#post_sub_section_id").attr("disabled","");
+	});
+</script>
+<% if @post.category_id == 1 %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#form_nedw").show();	
+	});
+</script>
 <% end %>
 
+<% content_for(:menu) do %>
+	<%= render :partial => 'nmenu' %>
+<% end %>
+
+<% form_for @post, :html => { :multipart => true } do |f| %>
 <div class="container_12">
 	<div class="grid_7">
-		<span class="mylabelstyle">
-		Категория:&nbsp;<%=h Catandrazd.find_by_cat_id(@post.category).category -%><br />
-		Раздел:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=h Catandrazd.find_by_cat_id_and_razd_id(@post.category, @post.razdel).razdel -%>
-		</span><br /><br />
-		<% form_for @post, :html => { :multipart => true } do |f| %>
-		  <%= f.error_messages %>
-		  <p>
-			<%= f.label(:title, "Заголовок :", :class => "mylabelstyle") %><br />
-			<%= f.text_field :name, :size => 41, :class => "myinputstyle" %>
-		  </p>
-		  <p>
-		    <%= f.label(:title, "Текст объявления :", :class => "mylabelstyle") %><br />
-		    <%= f.text_area :content, :cols => 40, :rows => 8, :class => "myinputstyle" %>
-		  </p>
-		  <p>
-			<%= f.label(:title, "Цена, только цифры без пробелов :", :class => "mylabelstyle") %><br />
-			<%= f.text_field :price, :size => 41, :class => "myinputstyle" %>
-		  </p>
-		  <p>
-			<%= f.label(:title, "Комментарий к цене :", :class => "mylabelstyle") %><br />
-			<%= f.text_field :pricecomment, :size => 41, :class => "myinputstyle" %>
-		  </p>
-		  <p>
-			<% fields_for @postfoto do |child_form| %>
-				<%= child_form.label(:title, "Добавить фото:", :class => "mylabelstyle") %><br />
-				<%= child_form.file_field :photo, :size => 26, :class => "myinputstyle" %>
-			<% end %>
-		  </p>
-
-		  <p><%= f.submit "Отправить" %></p>
-		  <p><%= f.submit "Продлить объявление" %></p>
+		<div id="locations">
+			<%= f.label(:sub_section, "Населённый пункт :", :class => "mylabelstyle") %>
+			<%= f.select :location_id, options_for_select( @locations, [@post.location.to_s,@post.location_id.to_s] ) %>
+		</div>
+		<div id="categories">
+			<%= f.label(:category, "Категория :", :class => "mylabelstyle") %>
+			<%= f.select :category_id, options_for_select(@categories, [@post.categorie.to_s,@post.category_id.to_s]) %>
+		</div>
+		<div id="sections">
+			<%= f.label(:section_id, "Раздел :", :class => "mylabelstyle") %>
+			<%= f.select :section_id, options_for_select(@sections, [@post.section.to_s,@post.section_id.to_s]) %>
+		</div>
+		<div id="subsections">
+			<%= f.label(:sub_section_id, "Под раздел :", :class => "mylabelstyle") %>
+			<%= f.select :sub_section_id, options_for_select(@subsections,[@post.sub_section.to_s,@post.sub_section_id.to_s]) %>
+		</div>
+		<br />
+		<%= f.label(:title, "Заголовок объявления:", :class => "mylabelstyle") %><br />
+		<%= f.text_field :name, :size => 41, :class => "myinputstyle" %><br />
+		<%= f.label(:title, "Текст объявления :", :class => "mylabelstyle") %><br />
+		<%= f.text_area :content, :cols => 60, :rows => 4, :class => "myinputstyle" %><br />
+		<% fields_for @postfoto do |child_form| %>
+			<%= child_form.label(:title, "Добавить фото в объявление:", :class => "mylabelstyle") %><br />
+			<%= child_form.file_field :photo, :size => 26, :class => "myinputstyle" %>
 		<% end %>
+		<p>
+		<div id="form_nedw">
+  			<fieldset class="myinputstyle" style="padding: 5px;">
+  			<legend style="margin-left: 30px;">Описание объекта</legend>
+  			<label class="mylabelstyle" for="rooms">Комнат :</label>
+  			<% f.fields_for :options do |o| %>
+  				<%= o.select :rooms, '<option value="0">кол-во комнат</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5+</option>'.html_safe %>
+  				<label class="mylabelstyle" for="floor">Этаж/этажность :</label>
+  				<%= o.text_field :floor, :size => 4, :value => "—/—" %><br />
+  		  		<p class="mylabelstyle">Площадь:
+  		  			<%= o.text_field :square, :size => 4, :value => "общая" %>м²
+  		  			<%= o.text_field :living_space, :size => 4, :value => "жилая" %>м²
+  				</p>
+  			<% end %>
+		</div>
+		<%= f.label(:title, "Цена, только цифры без пробелов :", :class => "mylabelstyle") %><br />
+		<%= f.text_field :price, :size => 21, :class => "myinputstyle" %>
+		<%= f.select :pricecomment, options_for_select([ {'exchange'=>'рубли', 'id'=>'rub'},{'exchange'=>'рубли, торг уместен', 'id'=>'rubtorg'},{'exchange'=>'доллары', 'id'=>'dollar'} ].map!{|x| [ x["exchange"], x["id"] ] }) %>
+		<fieldset class="myinputstyle" style="padding: 5px;">
+		<% f.fields_for :options do |o| %>			
+			<legend style="margin-left: 30px;">Контактные данные</legend>
+			<label class="mylabelstyle" for="tel_num">Телефон:</label>
+			<%= o.text_field :tel_num, :size => 12, :value => " " %>
+			<label class="mylabelstyle" for="email">email:</label>
+			<%= o.text_field :email, :size => 30, :value => " " %><br />
+			<label class="mylabelstyle" for="other_contact">Доп. информация:</label><br />
+			<%= o.text_area :other_contact, :cols => 60, :rows => 2 %>
+		<% end %>
+		</fieldset>
+		</p>
 	</div>
 	<div class="grid_5">
 		<span class="mylabelstyle">
@@ -59,9 +97,8 @@
 		<% end %>
 	</div>
 	<div class="clear"></div>
-	<div class="grid_10">&nbsp;</div>
-	<div class="grid_2">
-		<%= link_to "Удалить объявление", @post, :confirm => 'Are you sure?', :method => :delete %>
-	</div>
+	<div class="grid_5"><%= f.submit "Отправить" %></div>
+	<div class="grid_2"><%= link_to "Очистить форму", new_post_path %></div>
 	<div class="clear"></div>
 </div>
+<% end %>
