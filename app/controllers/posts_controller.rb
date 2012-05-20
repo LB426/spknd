@@ -53,9 +53,7 @@ class PostsController < ApplicationController
       @posts = Post.search_by_location_and_category_and_section_and_subsection(@location_id, @category_id, @section_id, @subsection_id, page)
     else
       @category = ProductCategory.find_by_category( "Недвижимость", :order => 'id ASC')
-      logger.debug "11111111111111111111111111111"
       @posts = Post.paginate_by_category_id @category.id, :page => page, :order => 'created_at DESC'
-      logger.debug "22222222222222222222222222222"
     end
     
   end
