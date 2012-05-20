@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     
     case "#{@location_id}+#{@category_id}+#{@section_id}+#{@subsection_id}"
     when /all\+\d\+all\+all/
-      @posts = Post.paginate_by_category @category_id, :page => page, :order => 'created_at DESC'
+      @posts = Post.paginate_by_category_id @category_id, :page => page, :order => 'created_at DESC'
     when /all\+\d\+\d\+all/
       @posts = Post.search_by_category_and_section(@category_id, @section_id, page)
     when /all\+\d\+\d\+\d/
@@ -53,7 +53,9 @@ class PostsController < ApplicationController
       @posts = Post.search_by_location_and_category_and_section_and_subsection(@location_id, @category_id, @section_id, @subsection_id, page)
     else
       @category = ProductCategory.find_by_category( "Недвижимость", :order => 'id ASC')
-      @posts = Post.paginate_by_location_id @category.id, :page => page, :order => 'created_at DESC'
+      logger.debug "11111111111111111111111111111"
+      @posts = Post.paginate_by_category_id @category.id, :page => page, :order => 'created_at DESC'
+      logger.debug "22222222222222222222222222222"
     end
     
   end

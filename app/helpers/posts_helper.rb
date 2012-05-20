@@ -8,4 +8,8 @@ module PostsHelper
     ret = "uslugi" if category_id == ProductCategory.find_by_category( "Разное" ).id
     "#{ret}"
   end
+
+  def location(post)
+  	Location.find_by_id(post.location_id).name
+  end
 end

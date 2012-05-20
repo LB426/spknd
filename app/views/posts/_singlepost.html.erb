@@ -1,7 +1,7 @@
 <% for post in @posts %>
 <div id="postscontent" class="container_16">
 	<div class="grid_3">
-		<p class="locality">Тихорецк</p>
+		<p class="locality"><%= location(post) %></p>
 		<% postfotos = post.postfotos.all(:order => 'id asc') %>
 		<% counter = 0 %>
 		<% for image in postfotos %>

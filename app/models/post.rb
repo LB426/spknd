@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
 
   def self.search_by_location_and_category(location, category, page)
     paginate  :per_page => @@per_page, :page => page,
-              :conditions => ['location_id=? AND category=?', "#{location}", "#{category}"], :order => 'updated_at DESC'
+              :conditions => ['location_id=? AND category_id=?', "#{location}", "#{category}"], :order => 'updated_at DESC'
   end
   
   def self.search_by_location_and_category_and_section(location, category, section, page)
