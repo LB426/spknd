@@ -12,4 +12,107 @@ module PostsHelper
   def location(post)
   	Location.find_by_id(post.location_id).name
   end
+
+  def rooms(post)
+    res = nil
+    unless post.options.nil?
+      unless post.options.empty?
+        res = post.options['rooms'] if post.options['rooms'] != ""
+      end
+    end
+    res
+  end
+
+  def floor(post)
+    res = "—/—"
+    unless post.options.nil?
+      unless post.options.empty?
+        if post.options['floor'] != "" && post.options['floor'] != "—/—"
+          res = post.options['floor']
+        end
+      end
+    end
+    res
+  end
+
+  def square(post)
+    res = nil
+    unless post.options.nil?
+      unless post.options.empty?
+        res = post.options['square']
+      end
+    end
+    res
+  end
+
+  def livingspace(post)
+    res = nil
+    unless post.options.nil?
+      unless post.options.empty?
+        res = post.options['living_space']
+      end
+    end
+    res
+  end
+
+  def contact_phone(post)
+    res = nil
+    unless post.options.nil?
+      unless post.options.empty?
+        res = post.options['tel_num']
+      end
+    end
+    res
+  end
+
+  def contact_email(post)
+    res = nil
+    unless post.options.nil?
+      unless post.options.empty?
+        res = post.options['email']
+      end
+    end
+    res
+  end
+
+  def contact_other(post)
+    res = nil
+    unless post.options.nil?
+      unless post.options.empty?
+        res = post.options['other_contact']
+      end
+    end
+    res
+  end
+
+  def pricecomment(post)
+    res = '<option value="рубли">рубли</option><option value="рубли, торг уместен">рубли, торг уместен</option><option value="доллары">доллары</option>'
+
+    res
+  end
+
+  def ploshad_obshaya_jilaya(post)
+    res = ""
+    if livingspace(post) != nil
+      "&nbsp;|Площадь общ./жилая:&nbsp;<b>#{square(post)}м²/#{livingspace(post)}м²</b>"
+    end
+    res
+  end
+
+  def jilyh_komnat(post)
+    res = ""
+    if rooms(post) != nil
+      res = "&nbsp;|Жилых комнат:&nbsp;<b>#{rooms(post)}</b>"
+    end
+    res
+  end
+
+  def etaj(post)
+    res = ""
+    if floor(post) != "—/—"
+      res = "&nbsp;|Этаж:&nbsp;<b>#{floor(post)}</b>"
+    end
+    res
+  end
+
 end

@@ -29,17 +29,14 @@
 		<% end %>
 	</div>
 	<div class="grid_12">
-		
 		<h3><%=h post.name %></h3>
 		<p><%=h post.content %></p>
 		<p class="price_description">
-		Цена: <b><%=h post.price %></b>&nbsp;|
-		Площадь общ./жилая:&nbsp;<b>60м²/35м²</b>&nbsp;|
-		Жилых комнат:&nbsp;<b>1</b>&nbsp;|
-		Этаж:&nbsp;<b>2</b></p>
-		<p><%=h post.pricecomment %></p>
-				
-		
+			Цена: <b><%=h post.price %> <%=h post.pricecomment %></b>
+			<%= ploshad_obshaya_jilaya(post).html_safe %>
+			<%= jilyh_komnat(post).html_safe %>
+			<%= etaj(post) %>
+		</p>
 	</div>
 	<div class="grid_1">
 		
@@ -47,7 +44,6 @@
 	<div class="clear"></div>
 	<span class="postfooter">
 	<div class="grid_3">
-	
 		<% if counter == 0 %>
 			фото не загружено
 		<% else %>

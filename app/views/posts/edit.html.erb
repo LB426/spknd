@@ -50,27 +50,27 @@
   			<legend style="margin-left: 30px;">Описание объекта</legend>
   			<label class="mylabelstyle" for="rooms">Комнат :</label>
   			<% f.fields_for :options do |o| %>
-  				<%= o.select :rooms, '<option value="0">кол-во комнат</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5+</option>'.html_safe %>
+  				<%= o.text_field :rooms, :size => 8, :value => rooms(@post) %>
   				<label class="mylabelstyle" for="floor">Этаж/этажность :</label>
-  				<%= o.text_field :floor, :size => 4, :value => "—/—" %><br />
+  				<%= o.text_field :floor, :size => 4, :value => floor(@post) %><br />
   		  		<p class="mylabelstyle">Площадь:
-  		  			<%= o.text_field :square, :size => 4, :value => "общая" %>м²
-  		  			<%= o.text_field :living_space, :size => 4, :value => "жилая" %>м²
+  		  			<%= o.text_field :square, :size => 4, :value => square(@post) %>м²
+  		  			<%= o.text_field :living_space, :size => 4, :value => livingspace(@post) %>м²
   				</p>
   			<% end %>
 		</div>
 		<%= f.label(:title, "Цена, только цифры без пробелов :", :class => "mylabelstyle") %><br />
 		<%= f.text_field :price, :size => 21, :class => "myinputstyle" %>
-		<%= f.select :pricecomment, options_for_select([ {'exchange'=>'рубли', 'id'=>'rub'},{'exchange'=>'рубли, торг уместен', 'id'=>'rubtorg'},{'exchange'=>'доллары', 'id'=>'dollar'} ].map!{|x| [ x["exchange"], x["id"] ] }) %>
+		<%= f.select :pricecomment, pricecomment(@post).html_safe %>
 		<fieldset class="myinputstyle" style="padding: 5px;">
 		<% f.fields_for :options do |o| %>			
 			<legend style="margin-left: 30px;">Контактные данные</legend>
 			<label class="mylabelstyle" for="tel_num">Телефон:</label>
-			<%= o.text_field :tel_num, :size => 12, :value => " " %>
+			<%= o.text_field :tel_num, :size => 12, :value => contact_phone(@post) %>
 			<label class="mylabelstyle" for="email">email:</label>
-			<%= o.text_field :email, :size => 30, :value => " " %><br />
+			<%= o.text_field :email, :size => 30, :value => contact_email(@post) %><br />
 			<label class="mylabelstyle" for="other_contact">Доп. информация:</label><br />
-			<%= o.text_area :other_contact, :cols => 60, :rows => 2 %>
+			<%= o.text_area :other_contact, :cols => 60, :rows => 2, :value => contact_other(@post) %>
 		<% end %>
 		</fieldset>
 		</p>
