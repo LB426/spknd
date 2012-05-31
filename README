@@ -63,3 +63,19 @@ rake db:seed
 
 Сделал автозаненсение всех возможных категорий, разделов и подразделов.
 Как это сделать смотри в файле db/seeds
+=======
+устанавливаем нужную версию Rails
+gem update --system 1.6.2
+gem install rdoc
+gem install -v=2.3.14 rails
+gem install -v=2.8.1 mysql
+gem install -v=2.1.5 authlogic
+gem install -v=2.3.3 paperclip
+gem sources --add 'http://gems.github.com/'
+gem install -v=2.3.11 mislav-will_paginate
+gem install -v=0.2.7 russian
+rake gems:refresh_specs
+
+Создал ветвь designer для дизайнера, который делает внешний вид.
+  
+
