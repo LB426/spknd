@@ -77,5 +77,5 @@ gem install -v=0.2.7 russian
 rake gems:refresh_specs
 
 Создал ветвь designer для дизайнера, который делает внешний вид.
-  
+Слил ветку designer с master. Теперь главная ветка - master.
 
