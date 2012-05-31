@@ -42,7 +42,7 @@ rvm install ree-1.8.7-2012.02
 3) устанавливаем нужную версию Rails
 gem install rdoc ;
 gem install -v=2.3.14 rails ;
-gem install -v=2.8.1 mysql ; # если персдавляли БД то и его нужно переставить!
+gem install -v=2.8.1 mysql ; # если перставляли БД то и его нужно переставить!
 gem install -v=2.1.5 authlogic ;
 gem install -v=2.3.3 paperclip ;
 gem sources --add 'http://gems.github.com/' ;

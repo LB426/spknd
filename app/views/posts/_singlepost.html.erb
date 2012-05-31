@@ -35,7 +35,10 @@
 			Цена: <b><%=h post.price %> <%=h post.pricecomment %></b>
 			<%= ploshad_obshaya_jilaya(post).html_safe %>
 			<%= jilyh_komnat(post).html_safe %>
-			<%= etaj(post) %>
+			<%= etaj(post).html_safe %>
+		</p>
+		<p class="price_description">
+			<%= contact(post).html_safe %>
 		</p>
 	</div>
 	<div class="grid_1">

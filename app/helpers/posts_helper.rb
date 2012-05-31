@@ -38,7 +38,7 @@ module PostsHelper
   def square(post)
     res = nil
     unless post.options.nil?
-      unless post.options.empty?
+      unless post.options['square'].nil?
         res = post.options['square']
       end
     end
@@ -48,8 +48,10 @@ module PostsHelper
   def livingspace(post)
     res = nil
     unless post.options.nil?
-      unless post.options.empty?
-        res = post.options['living_space']
+      unless post.options['living_space'].nil?
+        if post.options['living_space'] != ""
+          res = post.options['living_space']
+        end
       end
     end
     res
@@ -68,8 +70,10 @@ module PostsHelper
   def contact_email(post)
     res = nil
     unless post.options.nil?
-      unless post.options.empty?
-        res = post.options['email']
+      unless post.options['email'].nil?
+        if post.options['email'] != ""
+          res = post.options['email']
+        end
       end
     end
     res
@@ -87,14 +91,13 @@ module PostsHelper
 
   def pricecomment(post)
     res = '<option value="рубли">рубли</option><option value="рубли, торг уместен">рубли, торг уместен</option><option value="доллары">доллары</option>'
-
     res
   end
 
   def ploshad_obshaya_jilaya(post)
     res = ""
     if livingspace(post) != nil
-      "&nbsp;|Площадь общ./жилая:&nbsp;<b>#{square(post)}м²/#{livingspace(post)}м²</b>"
+      res = "&nbsp;| Площадь общ. <b>#{square(post)}м²</b> жилая:&nbsp;<b>#{livingspace(post)}м²</b>"
     end
     res
   end
@@ -102,7 +105,7 @@ module PostsHelper
   def jilyh_komnat(post)
     res = ""
     if rooms(post) != nil
-      res = "&nbsp;|Жилых комнат:&nbsp;<b>#{rooms(post)}</b>"
+      res = "&nbsp;| Жилых комнат:&nbsp;<b>#{rooms(post)}</b>"
     end
     res
   end
@@ -111,6 +114,17 @@ module PostsHelper
     res = ""
     if floor(post) != "—/—"
       res = "&nbsp;|Этаж:&nbsp;<b>#{floor(post)}</b>"
+    end
+    res
+  end
+
+  def contact(post)
+    res = ""
+    if contact_phone(post) != nil 
+      res = "тел. <b>#{contact_phone(post)}</b>"
+    end
+    if contact_email(post) != nil
+      res = "#{res} email: <b>#{contact_email(post)}</b>"
     end
     res
   end
