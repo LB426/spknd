@@ -36,22 +36,26 @@ class PostsController < ApplicationController
       end
     end
     
+    logger.debug "------------1 #{@location_id}+#{@category_id}+#{@section_id}+#{@subsection_id}"
+
     case "#{@location_id}+#{@category_id}+#{@section_id}+#{@subsection_id}"
-    when /all\+\d\+all\+all/
+    when /all\+\d*\+all\+all/
       @posts = Post.paginate_by_category_id @category_id, :page => page, :order => 'created_at DESC'
-    when /all\+\d\+\d\+all/
+    when /all\+\d*\+\d*\+all/
       @posts = Post.search_by_category_and_section(@category_id, @section_id, page)
-    when /all\+\d\+\d\+\d/
+    when /all\+\d*\+\d*\+\d*/
       @posts = Post.search_by_category_and_section_and_subsection(@category_id, @section_id, @subsection_id, page)
-    when /\d\+all\+all\+all/
+    when /\d*\+all\+all\+all/
+      logger.debug "---------------------------2"
       @posts = Post.paginate_by_location_id @location_id, :page => page, :order => 'created_at DESC'
-    when /\d\+\d\+all\+all/
+    when /\d*\+\d*\+all\+all/
       @posts = Post.search_by_location_and_category(@location_id, @category_id, page)
-    when /\d\+\d\+\d\+all/
+    when /\d*\+\d*\+\d*\+all/
       @posts = Post.search_by_location_and_category_and_section(@location_id, @category_id, @section_id, page)
-    when /\d\+\d\+\d\+\d/
+    when /\d*\+\d*\+\d*\+\d*/
       @posts = Post.search_by_location_and_category_and_section_and_subsection(@location_id, @category_id, @section_id, @subsection_id, page)
     else
+      logger.debug "---------------------------0"
       @category = ProductCategory.find_by_category( "Недвижимость", :order => 'id ASC')
       @posts = Post.paginate_by_category_id @category.id, :page => page, :order => 'created_at DESC'
     end

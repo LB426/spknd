@@ -15,32 +15,32 @@ class Post < ActiveRecord::Base
   
   def self.search_by_location_and_category_and_section(location, category, section, page)
     paginate  :per_page => @@per_page, :page => page,
-              :conditions => ['location_id=? AND category=? AND section_id=?', "#{location}", "#{category}", "#{section}"], :order => 'updated_at DESC'
+              :conditions => ['location_id=? AND category_id=? AND section_id=?', "#{location}", "#{category}", "#{section}"], :order => 'updated_at DESC'
   end
 
   def self.search_by_location_and_category_and_section_and_subsection(location, category, section, subsection, page)
     paginate  :per_page => @@per_page, :page => page,
-              :conditions => ['location_id=? AND category=? AND section_id=? AND sub_section_id=?', "#{location}", "#{category}", "#{section}", "#{subsection}"], :order => 'updated_at DESC'
+              :conditions => ['location_id=? AND category_id=? AND section_id=? AND sub_section_id=?', "#{location}", "#{category}", "#{section}", "#{subsection}"], :order => 'updated_at DESC'
   end
   
   def self.search_by_category_and_section(category, section, page)
     paginate  :per_page => @@per_page, :page => page,
-              :conditions => ['category=? AND section_id=?', "#{category}", "#{section}"], :order => 'updated_at DESC'
+              :conditions => ['category_id=? AND section_id=?', "#{category}", "#{section}"], :order => 'updated_at DESC'
   end
 
   def self.search_by_category_and_section_and_subsection(category, section, subsection, page)
     paginate  :per_page => @@per_page, :page => page,
-              :conditions => ['category=? AND section_id=? AND sub_section_id=?', "#{category}", "#{section}", "#{subsection}"], :order => 'updated_at DESC'
+              :conditions => ['category_id=? AND section_id=? AND sub_section_id=?', "#{category}", "#{section}", "#{subsection}"], :order => 'updated_at DESC'
   end
 
   def self.searchbycat(category, page)
     paginate  :per_page => 10, :page => page,
-              :conditions => ['category=?', "#{category}"], :order => 'created_at DESC'
+              :conditions => ['category_id=?', "#{category}"], :order => 'created_at DESC'
   end
   
   def self.searchbyrazd(category, razdel, page)
     paginate  :per_page => 10, :page => page,
-              :conditions => ['category=? AND razdel=?', "#{category}","#{razdel}"], :order => 'updated_at DESC'
+              :conditions => ['category_id=? AND razdel=?', "#{category}","#{razdel}"], :order => 'updated_at DESC'
   end
   
   def self.searchbyNameAndContent(param,page)

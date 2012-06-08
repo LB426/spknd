@@ -59,6 +59,7 @@ s = ProductSection.create(    :section => 'Аренда', :product_category_id =
   ProductSubSection.create(     :subsection => 'Прочее', :product_category_id => n.id, :product_section_id => s.id )
 
 n = ProductCategory.create( :category => 'Транспорт' )
+s = ProductSection.create(    :section => 'Легковые', :product_category_id => n.id )
 s = ProductSection.create(    :section => 'Грузовые, автобусы, спец. техника', :product_category_id => n.id )
 s = ProductSection.create(    :section => 'Мотоциклы, снегоходы', :product_category_id => n.id )
 s = ProductSection.create(    :section => 'Водный транспорт', :product_category_id => n.id )
