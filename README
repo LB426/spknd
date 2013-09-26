@@ -78,4 +78,4 @@ rake gems:refresh_specs
 
 Создал ветвь designer для дизайнера, который делает внешний вид.
 Слил ветку designer с master. Теперь главная ветка - master.
-
+test
